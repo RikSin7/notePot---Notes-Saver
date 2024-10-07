@@ -1,0 +1,64 @@
+import React, { useEffect } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Paste from "./components/Pastes";
+import ViewPaste from "./components/ViewPaste";
+import { Toaster } from "react-hot-toast";
+import { useSelector } from "react-redux";
+
+function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <div>
+          <Navbar />
+          <Home />
+        </div>
+      ),
+    },
+    {
+      path: "/pastes",
+      element: (
+        <div>
+          <Navbar />
+          <Paste />
+        </div>
+      ),
+    },
+    {
+      path: "/pastes/:id",
+      element: (
+        <div>
+          <Navbar />
+          <ViewPaste />
+        </div>
+      ),
+    },
+  ]);
+
+  const isDarkMode = useSelector((state) => state.darkMode.isDarkMode);
+
+  // Apply the 'dark' class to the root element based on Redux state
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDarkMode]);
+
+  return (
+    <div
+      className={`flex justify-center min-h-screen transition-bg duration-300 ${
+        isDarkMode ? "bg-darkBg text-darkText" : "bg-lightBg text-lightText"
+      }`}
+    >
+      <RouterProvider router={router} />
+      <Toaster />
+    </div>
+  );
+}
+
+export default App;
