@@ -53,7 +53,7 @@ function Home() {
           />
         </div>
         <button
-          className="bg-[#654A4E] px-5 sm:py-3 py-2 transition-bg duration-300 rounded-md border border-[#989393] min-w-[10vw] cursor-pointer text-white"
+          className="bg-[#654A4E] px-5 sm:py-3 py-2 transition-bg duration-300 rounded-md border border-[#323232] min-w-[10vw] cursor-pointer text-white"
           onClick={createPaste}
         >
           {pasteId ? "Update note" : "Create note"}

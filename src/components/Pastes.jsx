@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
-import { removeFromPastes } from "../redux/pasteSlice";
+import { removeFromPastes, resetAllPastes } from "../redux/pasteSlice";
 
 function Pastes() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -44,6 +44,13 @@ function Pastes() {
   const handleDelete = (pasteId) => {
     dispatch(removeFromPastes(pasteId));
   };
+
+  const handleResetAll = () => {
+    const confirmed = window.confirm("Are you sure? This cannot be undone!");
+    if (confirmed) {
+      dispatch(resetAllPastes());
+    }
+  };
   return (
     <div className="flex flex-col items-center w-full mt-16 px-4">
       <input
@@ -51,10 +58,14 @@ function Pastes() {
         placeholder="Search My Notes..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="placeholder:font-[silkScreen]  min-w-[30vw]  text-lg dark:bg-[#654A4E] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full mt-2 placeholder:text-[#414141] flex-col justify-center mx-4 placeholder:text-center text-center caret-[#0d601d] custom-caret dark:placeholder:text-[white] transition-all duration-300 outline-none hover:outline-[#825a5a]"
+        className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#654A4E] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 placeholder:text-[#414141] flex-col justify-center placeholder:text-center text-center caret-[#0d601d] custom-caret dark:placeholder:text-[white] outline-none hover:outline-[#825a5a] bg-[#ffffff] transition-all duration-300"
+
+        //
+
+        //
       />
-      <h1 className="text-white dark:text-[#558850] md:text-5xl text-2xl sm:font-semibold mt-4 border border-black w-[98vw] py-2 px-2 rounded-md dark:bg-bgInDark bg-[#916A70] transition-all duration-300">
-        All Notes
+      <h1 className="text-[#ffffff] dark:text-[#646464] md:text-5xl text-2xl font-semibold mt-4 border border-black w-[98vw] py-2 px-2 rounded-md dark:bg-bgInDark bg-[#916A70] transition-all duration-300 flex items-center ">
+        My Notes
       </h1>
       <div className="pastes flex flex-col gap-2 mt-8 w-[98vw] mb-8">
         {filterdPastes.length > 0 &&
@@ -64,7 +75,7 @@ function Pastes() {
               key={paste._id}
             >
               <div className="titleAndControls flex justify-between ">
-                <div className="text-[#292929] dark:text-[#bd6363] sm:text-5xl text-3xl font-semibold mb-2">
+                <div className="text-[#9a5d5d] dark:text-[#9a5d5d] sm:text-5xl text-3xl font-semibold mb-2 transition-all duration-300">
                   {paste.title}
                 </div>
                 <span className="flex gap-4  sm:text-lg text-sm ">
@@ -129,14 +140,24 @@ function Pastes() {
                 </span>
               </div>
               <div className="">
-                <div className="text-[#2D3031] dark:text-[#ffffff] sm:text-xl text-md flex flex-grow">
+                <div className="text-[#2D3031] dark:text-[#ffffff] sm:text-xl text-md transition-all duration-300">
                   {paste.description}
                 </div>
-                <div className="flex justify-end sm:text-base text-xs text-[#9b5252] dark:text-[#d47a7a] mt-1">{` Created at: ${paste.createdAt}`}</div>
+                <div className="flex transition-all duration-300 justify-end sm:text-base text-xs text-[#713d3d] dark:text-[#918a8a] mt-1">{` Created at: ${paste.createdAt}`}</div>
               </div>
             </div>
           ))}
       </div>
+      {allPastes.length > 3 && (
+        <div className="flex justify-center">
+          <button
+            className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#654A4E] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center  bg-[#ffffff] transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8"
+            onClick={handleResetAll}
+          >
+            Reset All Notes!!!
+          </button>
+        </div>
+      )}
     </div>
   );
 }

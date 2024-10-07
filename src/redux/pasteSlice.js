@@ -38,14 +38,14 @@ const pasteSlice = createSlice({
       )
 
       if (duplicate) {
-        toast.error('A paste with the same title already exists.')
+        toast.error('A note with the same title already exists.')
         return
       }
 
       // Add the new paste to the array and save to localStorage.
       state.pastes.push(paste)
       localStorage.setItem('pastes', JSON.stringify(state.pastes))
-      toast.success('Paste created successfully.')
+      toast.success('Note created.')
     },
 
     updateToPastes: (state, action) => {
@@ -57,22 +57,22 @@ const pasteSlice = createSlice({
         // Check if the paste was found.
         state.pastes[index] = updatedPaste // Update the paste in the array at the found index
         localStorage.setItem('pastes', JSON.stringify(state.pastes)) // Optionally update localStorage
-        toast.success('Paste updated successfully.') // Optionally notify the user
+        toast.success('Note updated.') // Optionally notify the user
       } else {
-        toast.error('Paste not found.') // Handle case where the paste is not found (optional)
+        toast.error('Note not found.') // Handle case where the paste is not found (optional)
       }
     },
     resetAllPastes: state => {
       state.pastes = [] // Reset the pastes array to empty
       localStorage.removeItem('pastes') // Remove pastes from localStorage
-      toast.success('All pastes have been reset successfully.')
+      toast.success('All notes have been reset.')
     },
     removeFromPastes: (state, action) => {
       const pasteId = action.payload // The ID of the paste to be removed
       // console.log(pasteId)
       state.pastes = state.pastes.filter(paste => paste._id !== pasteId) // This line uses the filter method to create a new array that contains all pastes except the one with the matching _id. If a paste's _id matches pasteId, it will be excluded from the new array.
       localStorage.setItem('pastes', JSON.stringify(state.pastes))
-      toast.success('Paste removed successfully.')
+      toast.success('Note removed successfully.')
     }
 
     //Other way of doing this:
