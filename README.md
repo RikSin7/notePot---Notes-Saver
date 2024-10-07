@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -10,3 +11,6 @@ Currently, two official plugins are available:
 =======
 # NotePot---Notes-Saver-
 >>>>>>> 73f285534f9a0917d34ba1fc11ef915478b09c8c
+=======
+# notePot---Notes-Saver
+>>>>>>> ddb3ba7088b455395d99273cae2ec17b89498631
