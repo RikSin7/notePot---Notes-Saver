@@ -8,7 +8,7 @@ function Navbar() {
   const isDarkMode = useSelector((state) => state.darkMode.isDarkMode);
 
   return (
-    <div className="flex justify-around bg-[#ffffff] dark:bg-[#2D3031] rounded-md py-4 w-[100vw] absolute left-[50%] translate-x-[-50%] text-black dark:text-white transition-colors duration-300 gap-[50vw]">
+    <div className="flex justify-around bg-[#ffffff] dark:bg-[#2D3031] rounded-md py-4 w-full absolute left-[50%] translate-x-[-50%] text-black dark:text-white transition-colors duration-300 gap-[50vw]">
       <NavLink
         to="/"
         className={({ isActive }) =>

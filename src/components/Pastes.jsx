@@ -52,7 +52,7 @@ function Pastes() {
     }
   };
   return (
-    <div className="flex flex-col items-center w-full mt-16 px-4">
+    <div className="flex flex-col items-center  mt-16 px-4 w-[98vw]">
       <input
         type="text"
         placeholder="Search My Notes..."
@@ -64,7 +64,7 @@ function Pastes() {
 
         //
       />
-      <h1 className="text-[#ffffff] dark:text-[#646464] md:text-5xl text-2xl font-semibold mt-4 border border-black w-[98vw] py-2 px-2 rounded-md dark:bg-bgInDark bg-[#916A70] transition-all duration-300 flex items-center ">
+      <h1 className="text-[#ffffff] dark:text-[#646464] md:text-5xl text-2xl font-semibold mt-4 border border-black w-[98vw] py-2 px-2 rounded-md dark:bg-bgInDark bg-[#916A70] transition-all duration-300 flex items-center">
         My Notes
       </h1>
       <div className="pastes flex flex-col gap-2 mt-8 w-[98vw] mb-8">
@@ -74,7 +74,7 @@ function Pastes() {
               className="border border-[#805151] dark:border-[black] dark:bg-bgInDark bg-[#D9DFE9] py-1 px-4 rounded-xl flex flex-col md:gap-1 max-h-[300px] overflow-y-auto transition-all duration-300"
               key={paste._id}
             >
-              <div className="titleAndControls flex justify-between ">
+              <div className="titleAndControls flex flex-wrap justify-between gap-2 mb-2">
                 <div className="text-[#9a5d5d] dark:text-[#9a5d5d] sm:text-5xl text-3xl font-semibold mb-2 transition-all duration-300">
                   {paste.title}
                 </div>
