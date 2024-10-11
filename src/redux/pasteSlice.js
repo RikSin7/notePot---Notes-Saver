@@ -1,93 +1,77 @@
 import { createSlice } from '@reduxjs/toolkit'
 import toast from 'react-hot-toast'
 
+const initialState = {
+  pastes: localStorage.getItem('pastes')
+    ? JSON.parse(localStorage.getItem('pastes'))
+    : []
+}
+
 const pasteSlice = createSlice({
   name: 'paste',
-  initialState: {
-    pastes: localStorage.getItem('pastes')
-      ? JSON.parse(localStorage.getItem('pastes')) //JSON.parse converts a JSON string back into a JS object or array.
-      : []
-  },
+  initialState,
   reducers: {
     addToPastes: (state, action) => {
       const paste = action.payload
-
-      // Trim the title and description to check for empty spaces.
-      const trimmedTitle = paste.title.trim()
-      const trimmedDescription = paste.description.trim()
-
-      // Check if the title or description is empty or contains only spaces.
-      if (!trimmedTitle && !trimmedDescription) {
-        toast.error('Title and description cannot be empty.')
-        return
-      }
-
-      if (!trimmedTitle) {
-        toast.error('Title cannot be empty.')
-        return
-      }
-
-      if (!trimmedDescription) {
-        toast.error('Description cannot be empty.')
-        return
-      }
-
-      // Check for duplicate paste by title.
-      const duplicate = state.pastes.find(
-        item => item.title.toLowerCase() === trimmedTitle.toLowerCase()
+      const existingPaste = state.pastes.find(
+        p => p.title.toLowerCase() === paste.title.toLowerCase()
       )
 
-      if (duplicate) {
-        toast.error('A note with the same title already exists.')
+      if (existingPaste) {
+        toast.error('A note with the same title already exists!')
         return
+      } else if (!paste.title.trim() && !paste.description.trim()) {
+        toast.error('Title and description cannot be empty!')
+        return
+      } else if (!paste.title.trim()) {
+        toast.error('Title cannot be empty!')
+        return
+      } else if (!paste.description.trim()) {
+        toast.error('Description cannot be empty!')
+        return
+      } else {
+        state.pastes.push(paste)
+        localStorage.setItem('pastes', JSON.stringify(state.pastes))
+        toast.success('Note created.')
       }
-
-      // Add the new paste to the array and save to localStorage.
-      state.pastes.push(paste)
-      localStorage.setItem('pastes', JSON.stringify(state.pastes))
-      toast.success('Note created.')
     },
 
     updateToPastes: (state, action) => {
-      const updatedPaste = action.payload // This is the updated paste object from the action payload.
-      const index = state.pastes.findIndex(
-        paste => paste._id === updatedPaste._id // Find the index of the paste to be updated using the _id
-      )
+      const updatedPaste = action.payload
+      const index = state.pastes.findIndex(p => p._id === updatedPaste._id)
+
       if (index !== -1) {
-        // Check if the paste was found.
-        state.pastes[index] = updatedPaste // Update the paste in the array at the found index
-        localStorage.setItem('pastes', JSON.stringify(state.pastes)) // Optionally update localStorage
-        toast.success('Note updated.') // Optionally notify the user
+        if (!updatedPaste.title.trim() && !updatedPaste.description.trim()) {
+          toast.error('Title and description cannot be empty!')
+          return
+        } else if (!updatedPaste.title.trim()) {
+          toast.error('Title cannot be empty!')
+          return
+        } else if (!updatedPaste.description.trim()) {
+          toast.error('Description cannot be empty!')
+          return
+        } else {
+          state.pastes[index] = updatedPaste
+          localStorage.setItem('pastes', JSON.stringify(state.pastes))
+          toast.success('Note updated.')
+        }
       } else {
-        toast.error('Note not found.') // Handle case where the paste is not found (optional)
+        toast.error('Note not found for updating.')
       }
     },
-    resetAllPastes: state => {
-      state.pastes = [] // Reset the pastes array to empty
-      localStorage.removeItem('pastes') // Remove pastes from localStorage
-      toast.success('All notes have been reset.')
-    },
+
     removeFromPastes: (state, action) => {
-      const pasteId = action.payload // The ID of the paste to be removed
-      // console.log(pasteId)
-      state.pastes = state.pastes.filter(paste => paste._id !== pasteId) // This line uses the filter method to create a new array that contains all pastes except the one with the matching _id. If a paste's _id matches pasteId, it will be excluded from the new array.
+      const id = action.payload
+      state.pastes = state.pastes.filter(p => p._id !== id)
       localStorage.setItem('pastes', JSON.stringify(state.pastes))
-      toast.success('Note removed successfully.')
+      toast.success('Note removed.')
+    },
+
+    resetAllPastes: state => {
+      state.pastes = []
+      localStorage.removeItem('pastes')
+      toast.success('All notes have been reset.')
     }
-
-    //Other way of doing this:
-
-    // removeFromPaste: (state, action) => {
-    //   const pasteIdToRemove = action.payload; // Get the ID from the action's payload
-
-    //   const index = state.pastes.findIndex(paste => paste._id === pasteIdToRemove); // Find the index of the paste to remove
-
-    //   if (index !== -1) { // Check if the paste exists
-    //     state.pastes.splice(index, 1); // Remove the paste from the array using splice
-    //     localStorage.setItem('pastes', JSON.stringify(state.pastes)); // Update localStorage
-    //     toast.success('Paste removed successfully.'); // Notify the user
-    //   }
-    // }
   }
 })
 

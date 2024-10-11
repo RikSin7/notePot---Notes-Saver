@@ -31,7 +31,7 @@ function Home() {
       }),
     };
     pasteId ? dispatch(updateToPastes(paste)) : dispatch(addToPastes(paste));
-    if (paste.title && paste.description) {
+    if (paste.title.trim() && paste.description.trim()) {
       setTitle("");
       setValue("");
       setSearchParams({});
@@ -53,7 +53,7 @@ function Home() {
           />
         </div>
         <button
-          className="bg-[#654A4E] px-5 sm:py-3 py-2 transition-bg duration-300 rounded-md border border-[#323232] min-w-[10vw] cursor-pointer text-white"
+          className="bg-[#654A4E] px-5 sm:py-3 py-2 transition-bg duration-300 rounded-md border border-[#323232] min-w-[10vw] cursor-pointer text-white active:scale-90"
           onClick={createPaste}
         >
           {pasteId ? "Update note" : "Create note"}
