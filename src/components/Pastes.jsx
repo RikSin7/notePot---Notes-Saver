@@ -60,9 +60,19 @@ function Pastes() {
         onChange={(e) => setSearchTerm(e.target.value)}
         className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#654A4E] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 placeholder:text-[#414141] flex-col justify-center placeholder:text-center text-center caret-[#0d601d] custom-caret dark:placeholder:text-[white] outline-none hover:outline-[#825a5a] bg-[#ffffff] transition-all duration-300"
       />
-      <h1 className="text-[#ffffff] dark:text-[#646464] md:text-5xl text-2xl font-semibold mt-4 border border-black w-[98vw] py-2 px-2 rounded-md dark:bg-bgInDark bg-[#916A70] transition-all duration-300 flex items-center">
-        My Notes
-      </h1>
+      <div className="flex items-center mt-4">
+        <h1 className="text-[#ffffff] dark:text-[#646464] md:text-2xl text-2xl font-semibold  border border-black w-[98vw] md:py-4 py-2 px-2 rounded-md dark:bg-bgInDark bg-[#916A70] transition-all duration-300 flex">
+          My Notes
+          <svg
+            className="w-8 ml-1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12H4C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C9.25022 4 6.82447 5.38734 5.38451 7.50024L8 7.5V9.5H2V3.5H4L3.99989 5.99918C5.82434 3.57075 8.72873 2 12 2ZM13 7L12.9998 11.585L16.2426 14.8284L14.8284 16.2426L10.9998 12.413L11 7H13Z"></path>
+          </svg>
+        </h1>
+      </div>
       <div className="pastes flex flex-col gap-2 my-8 w-[98vw]">
         {filterdPastes.length > 0 ? (
           filterdPastes.map((paste) => (
@@ -74,7 +84,7 @@ function Pastes() {
                 <div className="text-[#9a5d5d] dark:text-[#9a5d5d] sm:text-5xl text-3xl font-semibold mb-2 transition-all duration-300">
                   {paste.title}
                 </div>
-                <span className="flex gap-4 sm:text-lg text-sm h-max items-center justify-center mt-2">
+                <span className="flex gap-[10px] sm:gap-[19px] sm:text-lg text-sm h-max items-center justify-center mt-2">
                   {/* Edit Button with Tooltip */}
                   <div className="edit relative group flex items-center">
                     <button className="transition-transform duration-300 ease-in-out transform hover:scale-75 z-10">
@@ -165,25 +175,35 @@ function Pastes() {
                 </span>
               </div>
 
-              <div>
+              <div className="w-full">
                 <div
                   className="text-[#2D3031] dark:text-[#ffffff] sm:text-xl text-md transition-all duration-300"
                   style={{ whiteSpace: "pre-wrap" }}
                 >
                   {paste.description}
                 </div>
-                <div className="flex transition-all duration-300 justify-end sm:text-base text-xs text-[#713d3d] dark:text-[#918a8a] mt-1">{` Created at: ${paste.createdAt}`}</div>
+                <div className="flex items-center gap-1 transition-all duration-300 justify-end sm:text-base text-xs text-[#000000] dark:text-[#cf6b6b] my-1">
+                  <svg
+                    className="w-5 sm:w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M9 1V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9ZM20 11H4V19H20V11ZM7 5H4V9H20V5H17V7H15V5H9V7H7V5Z"></path>
+                  </svg>
+                  {paste.createdAt}
+                </div>
               </div>
             </div>
           ))
         ) : (
-          <div className="text-center flex justify-center items-center w-full md:text-5xl  text-3xl text-[#744c4c] dark:text-[#646464]  transition-bg duration-300 font-semibold font-[Tangerine]">
+          <div className="text-center flex justify-center items-center w-full md:text-5xl  text-3xl text-[#744c4c] dark:text-[#646464] transition-bg duration-300 font-semibold font-[Tangerine]">
             {searchTerm ? "No matching notes found!" : "No notes created yet!"}{" "}
             {/* Fallback message */}
           </div>
         )}
       </div>
-      {allPastes.length > 3 && (
+      {allPastes.length > 3 && !searchTerm && (
         <div className="flex justify-center">
           <button
             className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#654A4E] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center  bg-[#ffffff] transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8"

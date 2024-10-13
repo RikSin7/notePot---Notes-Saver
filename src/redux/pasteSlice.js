@@ -19,6 +19,7 @@ const pasteSlice = createSlice({
 
       if (existingPaste) {
         toast.error('A note with the same title already exists!')
+        
         return
       } else if (!paste.title.trim() && !paste.description.trim()) {
         toast.error('Title and description cannot be empty!')

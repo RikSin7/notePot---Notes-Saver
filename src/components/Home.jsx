@@ -20,6 +20,16 @@ function Home() {
   }, [pasteId]);
 
   const createPaste = () => {
+    // Check if a paste with the same title already exists
+    const duplicatePaste = allPastes.find(
+      (paste) => paste.title.trim().toLowerCase() === title.trim().toLowerCase()
+    );
+
+    if (duplicatePaste) {
+      // If a duplicate is found and we are not editing (pasteId is null), show an alert or toast
+      dispatch(addToPastes(duplicatePaste));
+      return;
+    }
     const paste = {
       title: title,
       description: value,
