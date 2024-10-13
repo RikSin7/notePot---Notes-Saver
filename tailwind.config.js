@@ -9,16 +9,16 @@ export default {
         darkBg: '#1B1C1E',
         lightText: '#000000',
         darkText: '#ffffff',
-        bgInDark: '#2D3031',
+        bgInDark: '#2D3031'
       },
       fontFamily: {
         rancho: ['Rancho', 'sans-serif']
       },
       screens: {
-        xs: {max: "410px"}
+        xs: { max: '410px' }
       },
       transitionProperty: {
-        bg: 'background-color', // Adding background color as a transition property
+        bg: 'background-color' 
       },
     }
   },
