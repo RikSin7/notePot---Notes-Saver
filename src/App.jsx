@@ -74,7 +74,6 @@ function App() {
           style: {
             background: isDarkMode ? "#333" : "#f9f9f9",
             color: isDarkMode ? "#fff" : "#333",
-            transition: "ease-in-out .2s",
           },
         }}
       />
