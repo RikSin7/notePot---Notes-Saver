@@ -59,7 +59,7 @@ function TodoTasks({
           >
             <div className="flex w-full justify-between items-start gap-4">
               <li
-                className={`sm:text-xl text-md transition-all duration-300 gap-3 my-2 flex items-center ${
+                className={`sm:text-xl text-md transition-opacity duration-300 gap-3 my-2 flex items-center ${
                   todo.completed
                     ? "line-through dark:text-[#515151] text-[#acacac]"
                     : ""
