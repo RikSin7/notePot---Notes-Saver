@@ -61,14 +61,14 @@ function TodoTasks({
               <li
                 className={`text-[#2D3031] dark:text-[#ffffff] sm:text-xl text-md active:transition-none transition-all duration-300 gap-3 my-2 flex items-center ${
                   todo.completed
-                    ? "line-through dark:text-[#696969] text-[#acacac]"
+                    ? "line-through dark:text-[#515151] text-[#acacac]"
                     : ""
                 }`}
               >
                 <input
                   type="checkbox"
                   className="peer hidden"
-                  checked={todo.completed}
+                  defaultChecked={todo.completed}
                 />
                 <span
                   className={`w-6 h-6 flex-shrink-0 transition-all duration-300 border-2 dark:border-[#737373] border-[#8e6969] rounded-full ${
