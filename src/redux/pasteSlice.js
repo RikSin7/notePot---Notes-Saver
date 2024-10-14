@@ -57,7 +57,7 @@ const pasteSlice = createSlice({
           toast.success('Note updated.')
         }
       } else {
-        toast.error('Note not found for updating.')
+        toast.error('Note not found for updating!')
       }
     },
 

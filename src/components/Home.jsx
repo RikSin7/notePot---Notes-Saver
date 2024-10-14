@@ -25,7 +25,7 @@ function Home() {
       (paste) => paste.title.trim().toLowerCase() === title.trim().toLowerCase()
     );
 
-    if (duplicatePaste) {
+    if (duplicatePaste && !pasteId) {
       // If a duplicate is found and we are not editing (pasteId is null), show an alert or toast
       dispatch(addToPastes(duplicatePaste));
       return;
@@ -59,11 +59,11 @@ function Home() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Untitled Note"
-            className="placeholder:text-[#c5c0c0] border border-[#616161] min-w-[20vw] px-2 sm:py-3 py-2 rounded-md outline-none dark:bg-bgInDark xs:w-full transition-bg duration-300"
+            className="placeholder:text-[#c5c0c0] border border-[#2a2a2a] min-w-[20vw] px-2 sm:py-3 py-2 rounded-md outline-none dark:bg-bgInDark xs:w-full transition-bg duration-300"
           />
         </div>
         <button
-          className="bg-[#654A4E] px-5 sm:py-3 py-2 transition-bg duration-300 rounded-md border border-[#323232] min-w-[10vw] cursor-pointer text-white active:scale-90"
+          className="bg-[#654A4E] px-5 sm:py-3 py-2 rounded-md border border-[#323232] min-w-[10vw] cursor-pointer text-white active:scale-90 transition-colors duration-300"
           onClick={createPaste}
         >
           {pasteId ? "Update note" : "Create note"}

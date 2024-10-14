@@ -7,9 +7,7 @@ const DarkModeToggle = () => {
   const isDarkMode = useSelector((state) => state.darkMode.isDarkMode);
 
   return (
-    <button
-      onClick={() => dispatch(toggleDarkMode())}
-    >
+    <button onClick={() => dispatch(toggleDarkMode())}>
       {isDarkMode ? "Light Mode" : "Dark Mode"}
     </button>
   );

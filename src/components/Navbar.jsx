@@ -8,7 +8,7 @@ function Navbar() {
   const isDarkMode = useSelector((state) => state.darkMode.isDarkMode);
 
   return (
-    <div className="flex justify-around bg-[#ffffff] dark:bg-[#2D3031] rounded-md py-4 w-full absolute left-[50%] translate-x-[-50%] text-black dark:text-white transition-colors duration-300 gap-[50vw]">
+    <div className="flex justify-around bg-[#ffffff] dark:bg-[#2D3031] rounded-md py-4 w-full absolute left-[50%] translate-x-[-50%] text-black dark:text-white transition-colors duration-300">
       <NavLink
         to="/"
         className={({ isActive }) =>
@@ -24,12 +24,13 @@ function Navbar() {
 
       {/* Toggle button for Dark Mode */}
       <button
-        className="bg-[#e1e1e1] dark:bg-gray-700 rounded-full md:w-7 md:h-7 h-6 w-6 flex justify-center items-center p-1 absolute"
+        className="bg-[#e1e1e1] dark:bg-gray-700 rounded-full p-1"
+        // className="bg-[#e1e1e1] dark:bg-gray-700 rounded-full  p-1 absolute right-[5%] xss:right-[2%] ml-8 "
         onClick={() => dispatch(toggleDarkMode())}
       >
         {isDarkMode ? (
           <svg
-            className="w-5 h-5 rotate-90 transition-transform duration-300"
+            className="w-4 h-4 md:w-5 md:h-5  rotate-90 transition-transform duration-300"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
@@ -38,7 +39,7 @@ function Navbar() {
           </svg>
         ) : (
           <svg
-            className="w-5 h-5 rotate-0 transition-transform duration-300"
+            className="w-4 h-4 md:w-5 md:h-5 rotate-0 transition-transform duration-300"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
@@ -58,7 +59,20 @@ function Navbar() {
           }`
         }
       >
-        My Notes
+        Notes
+      </NavLink>
+
+      <NavLink
+        to="/todoinput"
+        className={({ isActive }) =>
+          `hover:transition-colors hover:duration-300 font-semibold ${
+            isActive
+              ? "text-[#8d5353] underline"
+              : "hover:text-[#8d5353] rounded-full"
+          }`
+        }
+      >
+        To-Dos
       </NavLink>
     </div>
   );

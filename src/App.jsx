@@ -6,6 +6,7 @@ import Paste from "./components/Pastes";
 import ViewPaste from "./components/ViewPaste";
 import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
+import TodoInput from "./components/TodoInput";
 
 function App() {
   const router = createBrowserRouter([
@@ -36,6 +37,15 @@ function App() {
         </div>
       ),
     },
+    {
+      path: "/todoinput",
+      element: (
+        <div>
+          <Navbar />
+          <TodoInput />
+        </div>
+      ),
+    },
   ]);
 
   const isDarkMode = useSelector((state) => state.darkMode.isDarkMode);
@@ -56,7 +66,18 @@ function App() {
       }`}
     >
       <RouterProvider router={router} />
-      <Toaster />
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          duration: 2000,
+          style: {
+            background: isDarkMode ? "#333" : "#f9f9f9",
+            color: isDarkMode ? "#fff" : "#333",
+            transition: "ease-in-out .2s",
+          },
+        }}
+      />
     </div>
   );
 }

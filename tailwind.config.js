@@ -15,7 +15,8 @@ export default {
         rancho: ['Rancho', 'sans-serif']
       },
       screens: {
-        xs: { max: '410px' }
+        xs: { max: '410px' },
+        xss: {max: '360px'}
       },
       transitionProperty: {
         bg: 'background-color' 

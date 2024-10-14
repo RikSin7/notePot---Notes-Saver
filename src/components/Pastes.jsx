@@ -58,10 +58,10 @@ function Pastes() {
         placeholder="Search My Notes..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#654A4E] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 placeholder:text-[#414141] flex-col justify-center placeholder:text-center text-center caret-[#0d601d] custom-caret dark:placeholder:text-[white] outline-none hover:outline-[#825a5a] bg-[#ffffff] transition-all duration-300"
+        className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 flex-col justify-center placeholder:text-center text-center caret-[#0d601d] custom-caret outline-none hover:outline-[#825a5a] bg-[#ffffff] transition-all duration-300 placeholder:text-[#9e5959] placeholder:text-[14px] sm:placeholder:text-base"
       />
       <div className="flex items-center mt-4">
-        <h1 className="text-[#ffffff] dark:text-[#646464] md:text-2xl text-2xl font-semibold  border border-black w-[98vw] md:py-4 py-2 px-2 rounded-md dark:bg-bgInDark bg-[#916A70] transition-all duration-300 flex">
+        <h1 className="text-[#ffffff] dark:text-[#646464] md:text-2xl text-2xl font-semibold  border border-black w-[98vw] md:py-4 py-2 px-2 rounded-md dark:bg-bgInDark bg-[#654A4E] transition-all duration-300 flex justify-center">
           My Notes
           <svg
             className="w-8 ml-1"
@@ -77,7 +77,7 @@ function Pastes() {
         {filterdPastes.length > 0 ? (
           filterdPastes.map((paste) => (
             <div
-              className="border border-[#805151] dark:border-[black] dark:bg-bgInDark bg-[#D9DFE9] py-1 px-4 rounded-xl flex flex-col md:gap-1 max-h-[300px] overflow-y-auto transition-all duration-300"
+              className="border border-[#805151] dark:border-[black] dark:bg-bgInDark bg-[#D9DFE9] py-1 px-4  flex flex-col md:gap-1 max-h-[300px] overflow-y-auto transition-all duration-300 -mb-1 rounded-md"
               key={paste._id}
             >
               <div className="titleAndControls flex flex-wrap justify-between gap-2 my-4">
@@ -99,7 +99,7 @@ function Pastes() {
                         </svg>
                       </NavLink>
                     </button>
-                    <span className="absolute left-1/2 -translate-x-1/2 top-0 text-sm font-semibold opacity-0 translate-y-2 transition-opacity duration-300 group-hover:opacity-100 group-hover:translate-y-0 after:content-['Edit'] after:absolute after:-top-6 after:left-1/2 after:-translate-x-1/2 after:bg-[#484848] after:text-white after:rounded-lg after:px-2 after:py-1 after:shadow-md after:opacity-0 group-hover:after:opacity-100 group-hover:after:translate-y-0 after:ease-jump"></span>
+                    <span className="absolute left-1/2 -translate-x-1/2 top-0 text-sm font-semibold opacity-0 translate-y-2 transition-opacity duration-300 group-hover:opacity-100 group-hover:translate-y-0 after:content-['Edit'] after:absolute after:-top-6 after:left-1/2 after:-translate-x-1/2 after:bg-[#484848] after:text-white after:rounded-lg after:px-2 after:py-[2px] after:shadow-md after:opacity-0 group-hover:after:opacity-100 group-hover:after:translate-y-0 after:ease-jump"></span>
                   </div>
 
                   {/* View Button with Tooltip */}
@@ -116,7 +116,7 @@ function Pastes() {
                         </svg>
                       </NavLink>
                     </button>
-                    <span className="absolute left-1/2 -translate-x-1/2 top-0 text-sm font-semibold opacity-0 translate-y-2 transition-opacity duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 after:content-['View'] after:absolute after:-top-6 after:left-1/2 after:-translate-x-1/2 after:bg-[#484848] after:text-white after:rounded-lg after:px-2 after:py-1 after:shadow-md after:opacity-0 group-hover:after:opacity-100 group-hover:after:translate-y-0"></span>
+                    <span className="absolute left-1/2 -translate-x-1/2 top-0 text-sm font-semibold opacity-0 translate-y-2 transition-opacity duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 after:content-['View'] after:absolute after:-top-6 after:left-1/2 after:-translate-x-1/2 after:bg-[#484848] after:text-white after:rounded-lg after:px-2 after:py-[2px] after:shadow-md after:opacity-0 group-hover:after:opacity-100 group-hover:after:translate-y-0"></span>
                   </div>
 
                   {/* Copy Button with Tooltip */}
@@ -134,7 +134,7 @@ function Pastes() {
                         <path d="M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z"></path>
                       </svg>
                     </button>
-                    <span className="absolute left-1/2 -translate-x-1/2 top-0 text-sm font-semibold opacity-0 translate-y-2 transition-opacity duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 after:content-['Copy'] after:absolute after:-top-6 after:left-1/2 after:-translate-x-1/2 after:bg-[#484848] after:text-white after:rounded-lg after:px-2 after:py-1 after:shadow-md after:opacity-0 group-hover:after:opacity-100 group-hover:after:translate-y-0"></span>
+                    <span className="absolute left-1/2 -translate-x-1/2 top-0 text-sm font-semibold opacity-0 translate-y-2 transition-opacity duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 after:content-['Copy'] after:absolute after:-top-6 after:left-1/2 after:-translate-x-1/2 after:bg-[#484848] after:text-white after:rounded-lg after:px-2 after:py-[2px] after:shadow-md after:opacity-0 group-hover:after:opacity-100 group-hover:after:translate-y-0"></span>
                   </div>
 
                   {/* Delete Button with Tooltip */}
@@ -152,7 +152,7 @@ function Pastes() {
                         <path d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z"></path>
                       </svg>
                     </button>
-                    <span className="absolute left-1/2 -translate-x-1/2 top-0 text-sm font-semibold opacity-0 translate-y-2 transition-opacity duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 after:content-['Delete'] after:absolute after:-top-6 after:left-1/2 after:-translate-x-1/2 after:bg-[#484848] after:text-white after:rounded-lg after:px-2 after:py-1 after:shadow-md after:opacity-0 group-hover:after:opacity-100 group-hover:after:translate-y-0"></span>
+                    <span className="absolute left-1/2 -translate-x-1/2 top-0 text-sm font-semibold opacity-0 translate-y-2 transition-opacity duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 after:content-['Delete'] after:absolute after:-top-6 after:left-1/2 after:-translate-x-1/2 after:bg-[#484848] after:text-white after:rounded-lg after:px-2 after:py-[2px] after:shadow-md after:opacity-0 group-hover:after:opacity-100 group-hover:after:translate-y-0"></span>
                   </div>
 
                   {/* Share Button with Tooltip */}
@@ -170,7 +170,7 @@ function Pastes() {
                         <path d="M13.1202 17.0228L8.92129 14.7324C8.19135 15.5125 7.15261 16 6 16C3.79086 16 2 14.2091 2 12C2 9.79086 3.79086 8 6 8C7.15255 8 8.19125 8.48746 8.92118 9.26746L13.1202 6.97713C13.0417 6.66441 13 6.33707 13 6C13 3.79086 14.7909 2 17 2C19.2091 2 21 3.79086 21 6C21 8.20914 19.2091 10 17 10C15.8474 10 14.8087 9.51251 14.0787 8.73246L9.87977 11.0228C9.9583 11.3355 10 11.6629 10 12C10 12.3371 9.95831 12.6644 9.87981 12.9771L14.0788 15.2675C14.8087 14.4875 15.8474 14 17 14C19.2091 14 21 15.7909 21 18C21 20.2091 19.2091 22 17 22C14.7909 22 13 20.2091 13 18C13 17.6629 13.0417 17.3355 13.1202 17.0228ZM6 14C7.10457 14 8 13.1046 8 12C8 10.8954 7.10457 10 6 10C4.89543 10 4 10.8954 4 12C4 13.1046 4.89543 14 6 14ZM17 8C18.1046 8 19 7.10457 19 6C19 4.89543 18.1046 4 17 4C15.8954 4 15 4.89543 15 6C15 7.10457 15.8954 8 17 8ZM17 20C18.1046 20 19 19.1046 19 18C19 16.8954 18.1046 16 17 16C15.8954 16 15 16.8954 15 18C15 19.1046 15.8954 20 17 20Z"></path>
                       </svg>
                     </button>
-                    <span className="absolute left-1/2 -translate-x-1/2 top-0 text-sm font-semibold opacity-0 translate-y-2 transition-opacity duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 after:content-['Share'] after:absolute after:-top-6 after:left-1/2 after:-translate-x-1/2 after:bg-[#484848] after:text-white after:rounded-lg after:px-2 after:py-1 after:shadow-md after:opacity-0 group-hover:after:opacity-100 group-hover:after:translate-y-0"></span>
+                    <span className="absolute left-1/2 -translate-x-1/2 top-0 text-sm font-semibold opacity-0 translate-y-2 transition-opacity duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 after:content-['Share'] after:absolute after:-top-6 after:left-1/2 after:-translate-x-1/2 after:bg-[#484848] after:text-white after:rounded-lg after:px-2 after:py-[2px] after:shadow-md after:opacity-0 group-hover:after:opacity-100 group-hover:after:translate-y-0"></span>
                   </div>
                 </span>
               </div>
@@ -203,13 +203,13 @@ function Pastes() {
           </div>
         )}
       </div>
-      {allPastes.length > 3 && !searchTerm && (
+      {allPastes.length > 2 && !searchTerm && (
         <div className="flex justify-center">
           <button
-            className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#654A4E] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center  bg-[#ffffff] transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8"
+            className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center  bg-[#ffffff] transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8 text-[14px] sm:text-base text-[#9e5959] px-4"
             onClick={handleResetAll}
           >
-            Reset All Notes!!!
+            Reset All Notes !!!
           </button>
         </div>
       )}
