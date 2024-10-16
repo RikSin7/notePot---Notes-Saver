@@ -47,17 +47,29 @@ const todoSlice = createSlice({
       }
     },
 
+    togglePinTodo: (state, action) => {
+      const todoId = action.payload;
+      const todo = state.todos.find((t) => t._id === todoId);
+      if (todo) {
+        todo.pinned = !todo.pinned;
+        localStorage.setItem("todos", JSON.stringify(state.todos));
+        toast.success(todo.pinned ? "To-do pinned." : "To-do unpinned.", {
+          position: todo.pinned ? "bottom-center" : "top-center",
+        });
+      }
+    },
+
     toggleTodoCompletion: (state, action) => {
-        const todoId = action.payload;
-        const todo = state.todos.find(t => t._id === todoId);
-        if (todo) {
-          todo.completed = !todo.completed;
-          localStorage.setItem('todos', JSON.stringify(state.todos));
-          toast.success(
-            `To-do marked as ${todo.completed ? 'completed' : 'not completed'}.`
-          );
-        }
-      },
+      const todoId = action.payload;
+      const todo = state.todos.find((t) => t._id === todoId);
+      if (todo) {
+        todo.completed = !todo.completed;
+        localStorage.setItem("todos", JSON.stringify(state.todos));
+        toast.success(
+          `To-do marked as ${todo.completed ? "completed" : "not completed"}.`
+        );
+      }
+    },
 
     removeFromTodo: (state, action) => {
       const id = action.payload;
@@ -74,6 +86,12 @@ const todoSlice = createSlice({
   },
 });
 
-export const { addToTodo, updateToTodo, toggleTodoCompletion, removeFromTodo, resetAllTodo } =
-  todoSlice.actions;
+export const {
+  addToTodo,
+  updateToTodo,
+  togglePinTodo,
+  toggleTodoCompletion,
+  removeFromTodo,
+  resetAllTodo,
+} = todoSlice.actions;
 export default todoSlice.reducer;

@@ -87,7 +87,7 @@ function Pastes() {
                 <span className="flex gap-[10px] sm:gap-[19px] sm:text-lg text-sm h-max items-center justify-center mt-2">
                   {/* Edit Button with Tooltip */}
                   <div className="edit relative group flex items-center">
-                    <button className="transition-transform duration-300 ease-in-out transform hover:scale-75 z-10">
+                    <button className="relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125">
                       <NavLink to={`/?pasteId=${paste._id}`}>
                         <svg
                           className="edit w-6"
@@ -104,7 +104,7 @@ function Pastes() {
 
                   {/* View Button with Tooltip */}
                   <div className="view relative group flex items-center">
-                    <button className="hover:scale-75 transition-transform duration-300">
+                    <button className="relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125">
                       <NavLink to={`/pastes/${paste._id}`}>
                         <svg
                           className="w-6"
@@ -123,7 +123,7 @@ function Pastes() {
                   <div className="copy relative group flex items-center">
                     <button
                       onClick={() => handleCopy(paste)}
-                      className="hover:scale-75 transition-transform duration-300"
+                      className="relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125"
                     >
                       <svg
                         className="w-6"
@@ -141,7 +141,7 @@ function Pastes() {
                   <div className="delete relative group flex items-center">
                     <button
                       onClick={() => handleDelete(paste._id)}
-                      className="hover:scale-75 transition-transform duration-300"
+                      className="relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125"
                     >
                       <svg
                         className="w-6"
@@ -159,7 +159,7 @@ function Pastes() {
                   <div className="share relative group flex items-center">
                     <button
                       onClick={() => handleShare(paste)}
-                      className="hover:scale-75 transition-transform duration-300"
+                      className="relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125"
                     >
                       <svg
                         className="w-6"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TodoTasks from "./TodoTasks";
 import { useSearchParams } from "react-router-dom";
 import { addToTodo, updateToTodo } from "../redux/todoSlice";
@@ -20,6 +20,8 @@ function TodoInput() {
     }
   }, [todoId, allTodos]);
 
+  const inputRef = useRef(null);
+
   const createTodo = () => {
     // Check if a todo with the same title already exists
     const duplicateTodo = allTodos.find(
@@ -39,6 +41,8 @@ function TodoInput() {
         timeZone: "Asia/Kolkata", //Time zone for india
         hour12: true, // Use 12-hour format, set to false for 24-hour format
       }),
+      completed: false,
+      pinned: false,
     };
     todoId ? dispatch(updateToTodo(todo)) : dispatch(addToTodo(todo));
     if (todo.title.trim()) {
@@ -56,6 +60,8 @@ function TodoInput() {
         <input
           type="text"
           value={title}
+          // defaultValue={title}
+          ref={inputRef}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="What's the plan today?"
           className="placeholder:text-[#c5c0c0] border border-[#292929] min-w-[20vw] px-2 sm:py-4 py-3 sm:rounded-l-md sm:rounded-r-none rounded-md outline-none dark:bg-bgInDark transition-bg duration-300 sm:w-[60vw] w-[98vw]"
@@ -99,6 +105,7 @@ function TodoInput() {
         todoId={todoId}
         searchParams={searchParams}
         setSearchParams={setSearchParams}
+        inputRef={inputRef}
       />
     </div>
   );
