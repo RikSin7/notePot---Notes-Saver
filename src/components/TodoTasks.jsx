@@ -90,16 +90,10 @@ function TodoTasks({
     dispatch(removeFromTodo(todoId));
   };
 
-  const playResetSound = () => {
-    const audio = new Audio("/sweep.mp3");
-    audio.play();
-  };
-
   const handleResetAll = () => {
     const confirmed = window.confirm("Are you sure? This cannot be undone!");
     if (confirmed) {
       dispatch(resetAllTodo());
-      playResetSound();
     }
   };
 
