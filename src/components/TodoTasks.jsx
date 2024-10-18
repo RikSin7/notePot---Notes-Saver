@@ -91,7 +91,7 @@ function TodoTasks({
   };
 
   const playResetSound = () => {
-    const audio = new Audio("/resetSound.mp3");
+    const audio = new Audio("/sweep.mp3");
     audio.play();
   };
 
