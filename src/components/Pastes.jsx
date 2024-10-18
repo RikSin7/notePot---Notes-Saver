@@ -87,8 +87,8 @@ function Pastes() {
   };
 
   const playResetSound = () => {
-    const audio = new Audio("/resetSound.wav"); // Path to the sound file
-    audio.play(); // Play the sound
+    const audio = new Audio("/resetSound.mp3"); 
+    audio.play(); 
   };
 
   const handleResetAll = () => {
