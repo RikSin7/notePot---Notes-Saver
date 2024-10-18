@@ -25,7 +25,6 @@ const todoSlice = createSlice({
       } else {
         state.todos.push(todo);
         localStorage.setItem("todos", JSON.stringify(state.todos));
-        console.log(todo);
         toast.success("To-do created.");
       }
     },
