@@ -9,7 +9,13 @@ import {
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 
-function TodoTasks({ searchTerm, allTodos, setSearchParams, inputRef }) {
+function TodoTasks({
+  searchTerm,
+  allTodos,
+  setSearchParams,
+  inputRef,
+  setInputHightlight,
+}) {
   const dispatch = useDispatch();
   const [sortedTodos, setSortedTodos] = useState([]);
   const [highlightedTodo, setHighlightedTodo] = useState(null);
@@ -83,10 +89,17 @@ function TodoTasks({ searchTerm, allTodos, setSearchParams, inputRef }) {
   const handleDelete = (todoId) => {
     dispatch(removeFromTodo(todoId));
   };
+
+  const playResetSound = () => {
+    const audio = new Audio("/resetSound.wav"); // Path to the sound file
+    audio.play(); // Play the sound
+  };
+
   const handleResetAll = () => {
     const confirmed = window.confirm("Are you sure? This cannot be undone!");
     if (confirmed) {
       dispatch(resetAllTodo());
+      playResetSound();
     }
   };
 
@@ -94,9 +107,20 @@ function TodoTasks({ searchTerm, allTodos, setSearchParams, inputRef }) {
     e.stopPropagation();
     setSearchParams({ todoId });
     if (inputRef.current) {
-      inputRef.current.scrollIntoView({ behavior: "smooth" });
+      inputRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
       inputRef.current.focus();
+      setInputHightlight(todoId);
+      setTimeout(() => {
+        inputRef.current.classList.add("input-highlight");
+
+        setTimeout(() => {
+          inputRef.current.classList.remove("input-highlight");
+        }, 100);
+      }, 100);
     }
+    setTimeout(() => {
+      setInputHightlight(null);
+    }, 1500);
   };
   return (
     <div className="flex flex-col items-center mt-8 px-4 w-[98vw]">
@@ -104,20 +128,20 @@ function TodoTasks({ searchTerm, allTodos, setSearchParams, inputRef }) {
         sortedTodos.map((todo) => (
           <ul
             ref={(el) => (todoRefs.current[todo._id] = el)}
-            className={`border border-[#805151] dark:border-[black] rounded-md py-2 px-4 flex flex-col max-h-[300px] overflow-y-auto sm:w-[69vw] w-[98vw] mb-1 relative ${
+            className={`border border-[#805151] dark:border-[black] rounded-md py-2 px-4 flex flex-col overflow-y-auto w-[98vw] mb-1 relative placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] sm:p-4 p-2   justify-center bg-[#ffffff] outline-none sm:placeholder:text-base placeholder:text-[#9e5959] z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.99] hover:scale-[0.98] active:duration-300 placeholder:text-[14px] transition-all duration-300 ${
               highlightedTodo === todo._id
                 ? "bg-[#b5c4d6] dark:bg-[#1f2122] scale-[1.02] transition-all duration-500"
-                : "dark:bg-bgInDark bg-[#D9DFE9] transition-all duration-300 "
+                : "dark:bg-bgInDark bg-[#D9DFE9] transition-all duration-300"
             }`}
             onClick={() => handleToggleCompletion(todo._id)}
             key={todo._id}
           >
             <div className="flex w-full justify-between items-start gap-4">
               <li
-                className={`sm:text-xl text-md transition-bg duration-300 gap-3 my-2 flex items-center ${
+                className={`sm:text-xl text-md transition-all duration-300 gap-3 my-2 flex items-center ${
                   todo.completed
                     ? "line-through dark:text-[#515151] text-[#acacac]"
-                    : ""
+                    : "transition-bg duration-300"
                 }`}
               >
                 <input
@@ -164,7 +188,7 @@ function TodoTasks({ searchTerm, allTodos, setSearchParams, inputRef }) {
                   >
                     {todo.pinned ? (
                       <svg
-                        className="w-6 sm:w-7"
+                        className="w-6"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="currentColor"
@@ -173,7 +197,7 @@ function TodoTasks({ searchTerm, allTodos, setSearchParams, inputRef }) {
                       </svg>
                     ) : (
                       <svg
-                        className="w-6 sm:w-7"
+                        className="w-6"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="currentColor"
@@ -195,12 +219,12 @@ function TodoTasks({ searchTerm, allTodos, setSearchParams, inputRef }) {
                   onClick={(e) => e.stopPropagation()}
                 >
                   <button
-                    className="edit relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100 py-1 px-2"
+                    className={`edit relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100 py-1 px-2 `}
                     onClick={(e) => handleEditClick(e, todo._id)}
                   >
                     <NavLink to={`/todoinput`}>
                       <svg
-                        className="edit w-6 sm:w-7"
+                        className="edit w-6"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="currentColor"
@@ -225,7 +249,7 @@ function TodoTasks({ searchTerm, allTodos, setSearchParams, inputRef }) {
                     }}
                   >
                     <svg
-                      className="w-6 sm:w-7"
+                      className="w-6"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
@@ -249,7 +273,7 @@ function TodoTasks({ searchTerm, allTodos, setSearchParams, inputRef }) {
                     }}
                   >
                     <svg
-                      className="w-6 sm:w-7"
+                      className="w-6"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
@@ -287,9 +311,9 @@ function TodoTasks({ searchTerm, allTodos, setSearchParams, inputRef }) {
         </h1>
       )}
       {allTodos.length > 2 && !searchTerm && (
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center mt-6 w-full">
           <button
-            className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center  bg-[#ffffff] transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8 text-[14px] sm:text-base text-[#9e5959] px-4"
+            className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center bg-[#ffffff] transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8 text-[14px] sm:text-base text-[#9e5959] px-8 relative z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300"
             onClick={handleResetAll}
           >
             Reset All TO-DOs !!!

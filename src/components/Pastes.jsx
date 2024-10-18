@@ -1,17 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
-import { removeFromPastes, resetAllPastes } from "../redux/pasteSlice";
+import {
+  removeFromPastes,
+  resetAllPastes,
+  togglePinPaste,
+} from "../redux/pasteSlice";
 
 function Pastes() {
   const [searchTerm, setSearchTerm] = useState("");
   const allPastes = useSelector((state) => state.paste.pastes);
   const dispatch = useDispatch();
-  const filterdPastes = allPastes.filter((paste) =>
-    paste.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const [sortedPastes, setSortedPastes] = useState([]);
+  const pasteRefs = useRef({});
+  const [highlightPaste, setHighlightedPaste] = useState(null);
 
+  useEffect(() => {
+    const filteredPastes = allPastes.filter((paste) =>
+      paste.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const sorted = [...filteredPastes].sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+      return 0;
+    });
+
+    setSortedPastes(sorted);
+  }, [allPastes, searchTerm]);
+
+  const handleTogglePin = (pasteId) => {
+    const currentScrollPosition = window.scrollY;
+    dispatch(togglePinPaste(pasteId));
+    setHighlightedPaste(pasteId);
+    requestAnimationFrame(() => {
+      window.scrollTo(0, currentScrollPosition);
+      if (pasteRefs.current[pasteId]) {
+        setTimeout(() => {
+          pasteRefs.current[pasteId].scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+          pasteRefs.current[pasteId].classList.add("highlight-unpinned");
+          setTimeout(() => {
+            pasteRefs.current[pasteId].classList.remove("highlight-unpinned");
+          }, 500);
+        }, 100);
+      }
+      setTimeout(() => {
+        setHighlightedPaste(null);
+      }, 1000);
+    });
+  };
   const handleShare = (paste) => {
     // Construct the URL (replace with your actual app URL and use paste._id to make it unique)
     const linkToCopy = `${window.location.origin}/pastes/${paste._id}`;
@@ -45,10 +86,16 @@ function Pastes() {
     dispatch(removeFromPastes(pasteId));
   };
 
+  const playResetSound = () => {
+    const audio = new Audio("/resetSound.wav"); // Path to the sound file
+    audio.play(); // Play the sound
+  };
+
   const handleResetAll = () => {
     const confirmed = window.confirm("Are you sure? This cannot be undone!");
     if (confirmed) {
       dispatch(resetAllPastes());
+      playResetSound();
     }
   };
   return (
@@ -58,13 +105,13 @@ function Pastes() {
         placeholder="Search My Notes..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 flex-col justify-center placeholder:text-center text-center caret-[#0d601d] custom-caret outline-none hover:outline-[#825a5a] bg-[#ffffff] transition-all duration-300 placeholder:text-[#9e5959] placeholder:text-[14px] sm:placeholder:text-base"
+        className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 justify-center placeholder:text-center text-center  bg-[#ffffff] outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  relative z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 hover:scale-[0.90]"
       />
-      <div className="flex items-center mt-4">
-        <h1 className="text-[#ffffff] dark:text-[#646464] md:text-2xl text-2xl font-semibold  border border-black w-[98vw] md:py-4 py-2 px-2 rounded-md dark:bg-bgInDark bg-[#654A4E] transition-all duration-300 flex justify-center">
+      <div className="flex mt-4">
+        <h1 className="text-[#ffffff] dark:text-[#646464] md:text-5xl text-3xl font-semibold  border border-black w-[98vw] md:py-4 py-2 px-2 rounded-md dark:bg-bgInDark bg-[#654A4E] transition-all duration-300 flex justify-center gap-2 font-[rancho]">
           My Notes
           <svg
-            className="w-8 ml-1"
+            className="sm:w-11 w-7"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
@@ -74,20 +121,64 @@ function Pastes() {
         </h1>
       </div>
       <div className="pastes flex flex-col gap-2 my-8 w-[98vw]">
-        {filterdPastes.length > 0 ? (
-          filterdPastes.map((paste) => (
+        {sortedPastes.length > 0 ? (
+          sortedPastes.map((paste) => (
             <div
-              className="border border-[#805151] dark:border-[black] dark:bg-bgInDark bg-[#D9DFE9] py-1 px-4  flex flex-col md:gap-1 max-h-[300px] overflow-y-auto transition-all duration-300 -mb-1 rounded-md"
+              className={`border border-[#805151] dark:border-[black] rounded-md py-2 px-4 flex flex-col overflow-y-auto w-[98vw] relative placeholder:font-[silkScreen] min-w-[30vw] dark:bg-[#121212] sm:p-4 p-2 justify-center bg-[#ffffff] outline-none sm:placeholder:text-base placeholder:text-[#9e5959] z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.99] hover:scale-[0.98] active:duration-300 placeholder:text-[14px] transition-all duration-300 -mb-1  ${
+                highlightPaste === paste._id
+                  ? "bg-[#b5c4d6] dark:bg-[#1f2122] scale-[1.02] transition-all duration-500"
+                  : "dark:bg-bgInDark bg-[#EFF4F5] transition-all duration-300"
+              }`}
+              ref={(el) => (pasteRefs.current[paste._id] = el)}
               key={paste._id}
             >
-              <div className="titleAndControls flex flex-wrap justify-between gap-2 my-4">
+              <div className="titleAndControls flex flex-wrap  justify-between gap-2 my-4">
                 <div className="text-[#9a5d5d] dark:text-[#9a5d5d] sm:text-5xl text-3xl font-semibold mb-2 transition-all duration-300">
                   {paste.title}
                 </div>
                 <span className="flex gap-[10px] sm:gap-[19px] sm:text-lg text-sm h-max items-center justify-center mt-2">
+                  <div
+                    className="pin/unpin relative group flex items-center "
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {/* Pin/unpin button */}
+                    <button
+                      onClick={() => handleTogglePin(paste._id)}
+                      className="relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100"
+                    >
+                      {paste.pinned ? (
+                        <svg
+                          className="w-6"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M20.9701 17.1716 19.5559 18.5858 16.0214 15.0513 15.9476 15.1251 15.2405 18.6606 13.8263 20.0748 9.58369 15.8322 4.63394 20.7819 3.21973 19.3677 8.16947 14.418 3.92683 10.1753 5.34105 8.7611 8.87658 8.05399 8.95029 7.98028 5.41373 4.44371 6.82794 3.0295 20.9701 17.1716ZM10.3645 9.39449 9.86261 9.8964 7.04072 10.4608 13.5409 16.9609 14.1052 14.139 14.6071 13.6371 10.3645 9.39449ZM18.7761 9.46821 17.4356 10.8087 18.8498 12.2229 20.1903 10.8824 20.8974 11.5895 22.3116 10.1753 13.8263 1.69003 12.4121 3.10425 13.1192 3.81135 11.7787 5.15185 13.1929 6.56607 14.5334 5.22557 18.7761 9.46821Z"></path>
+                        </svg>
+                      ) : (
+                        <svg
+                          className="w-6"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M13.8273 1.69L22.3126 10.1753L20.8984 11.5895L20.1913 10.8824L15.9486 15.125L15.2415 18.6606L13.8273 20.0748L9.58466 15.8321L4.63492 20.7819L3.2207 19.3677L8.17045 14.4179L3.92781 10.1753L5.34202 8.76107L8.87756 8.05396L13.1202 3.81132L12.4131 3.10422L13.8273 1.69ZM14.5344 5.22554L9.86358 9.89637L7.0417 10.4607L13.5418 16.9609L14.1062 14.139L18.7771 9.46818L14.5344 5.22554Z"></path>
+                        </svg>
+                      )}
+                    </button>
+
+                    <span
+                      className={`absolute left-1/2 -translate-x-1/2 top-0 text-sm font-semibold opacity-0 translate-y-2 transition-opacity duration-300 group-hover:opacity-100 group-hover:translate-y-0 after:absolute after:-top-6 after:left-1/2 after:-translate-x-1/2 after:bg-[#484848] after:text-white after:rounded-lg after:px-2 after:py-[2px] after:shadow-md after:opacity-0 group-hover:after:opacity-100 group-hover:after:translate-y-0 after:ease-jump           ${
+                        paste.pinned
+                          ? "after:content-['Unpin'] "
+                          : "after:content-['Pin']"
+                      } `}
+                    ></span>
+                  </div>
+
                   {/* Edit Button with Tooltip */}
                   <div className="edit relative group flex items-center">
-                    <button className="relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125">
+                    <button className="edit relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100">
                       <NavLink to={`/?pasteId=${paste._id}`}>
                         <svg
                           className="edit w-6"
@@ -104,7 +195,7 @@ function Pastes() {
 
                   {/* View Button with Tooltip */}
                   <div className="view relative group flex items-center">
-                    <button className="relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125">
+                    <button className=" relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100">
                       <NavLink to={`/pastes/${paste._id}`}>
                         <svg
                           className="w-6"
@@ -123,7 +214,7 @@ function Pastes() {
                   <div className="copy relative group flex items-center">
                     <button
                       onClick={() => handleCopy(paste)}
-                      className="relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125"
+                      className=" relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100"
                     >
                       <svg
                         className="w-6"
@@ -141,7 +232,7 @@ function Pastes() {
                   <div className="delete relative group flex items-center">
                     <button
                       onClick={() => handleDelete(paste._id)}
-                      className="relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125"
+                      className=" relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100"
                     >
                       <svg
                         className="w-6"
@@ -159,7 +250,7 @@ function Pastes() {
                   <div className="share relative group flex items-center">
                     <button
                       onClick={() => handleShare(paste)}
-                      className="relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125"
+                      className=" relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100"
                     >
                       <svg
                         className="w-6"
@@ -206,7 +297,7 @@ function Pastes() {
       {allPastes.length > 2 && !searchTerm && (
         <div className="flex justify-center">
           <button
-            className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center  bg-[#ffffff] transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8 text-[14px] sm:text-base text-[#9e5959] px-4"
+            className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center bg-[#ffffff] transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8 text-[14px] sm:text-base text-[#9e5959] px-8 relative z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300"
             onClick={handleResetAll}
           >
             Reset All Notes !!!

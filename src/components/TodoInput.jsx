@@ -3,6 +3,7 @@ import TodoTasks from "./TodoTasks";
 import { useSearchParams } from "react-router-dom";
 import { addToTodo, updateToTodo } from "../redux/todoSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Timer from "./Timer";
 
 function TodoInput() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -11,6 +12,9 @@ function TodoInput() {
   const allTodos = useSelector((state) => state.todo.todos);
   const todoId = searchParams.get("todoId");
   const dispatch = useDispatch();
+  const [inputHighlight, setInputHightlight] = useState(null);
+  const [isRunning, setIsRunning] = useState(false);
+
   useEffect(() => {
     if (todoId) {
       const todoToEdit = allTodos.find((todo) => todo._id === todoId);
@@ -51,61 +55,85 @@ function TodoInput() {
     }
   };
 
+  const handleTimer = () => {
+    setIsRunning((prev) => !prev);
+  };
+
   return (
     <div className="flex flex-col items-center mt-16 px-4 w-[98vw]">
       <form
-        className="todoInput flex sm:flex-row flex-col mt-6 rounded-md"
+        className="todoInput flex sm:flex-row flex-col mt-6 rounded-md w-[98vw] gap-4"
         onSubmit={(e) => e.preventDefault()}
       >
         <input
           type="text"
           value={title}
-          // defaultValue={title}
           ref={inputRef}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="What's the plan today?"
-          className="placeholder:text-[#c5c0c0] border border-[#292929] min-w-[20vw] px-2 sm:py-4 py-3 sm:rounded-l-md sm:rounded-r-none rounded-md outline-none dark:bg-bgInDark transition-bg duration-300 sm:w-[60vw] w-[98vw]"
+          className={`placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full flex-col justify-center bg-[#ffffff] outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959] relative z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.98] hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 w-full
+      ${
+        inputHighlight
+          ? "transition-all duration-1000  scale-[1.03] outline-[#825a5a] "
+          : "transition-all duration-300  border border-[#292929]"
+      }`}
         />
         <button
-          className="bg-[#654A4E] px-5 sm:py-3 py-2  rounded-md sm:rounded-r-md sm:rounded-l-none sm:border sm:border-[#343434] min-w-[8vw] cursor-pointer text-white mt-2 sm:mt-0 border border-[#000000] active:scale-[.98] sm:active:scale-[1] active:bg-[#704e52] transition-colors duration-200"
+          className="min-w-[30vw] text-center dark:bg-[#121212] dark:border-black border-none sm:p-4 p-2 rounded-full justify-center font-[silkScreen] bg-[#fff] outline-none hover:outline-[#825a5a] relative z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.95] hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300  transition-all duration-300"
           onClick={createTodo}
         >
-          {todoId ? "Update" : "Create"}
+          {todoId ? "Update To-do" : "Create To-do"}
         </button>
       </form>
-      <div className="input mt-2">
+      <div className="input mt-2 flex justify-center w-full">
         <input
           type="text"
           placeholder="Search My To-do..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 flex-col justify-center placeholder:text-center text-center caret-[#0d601d] custom-caret outline-none hover:outline-[#825a5a] bg-[#ffffff] transition-all duration-300 placeholder:text-[#9e5959] placeholder:text-[14px] sm:placeholder:text-base"
-          //   dark:placeholder:text-[white]
-          // dark:bg-[#654A4E]
+          className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 justify-center placeholder:text-center text-center  bg-[#ffffff] outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  relative z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.95] hover:scale-[0.90] active:duration-300 placeholder:text-[14px] transition-all duration-300"
         />
       </div>
-      <div className="flex items-center mt-4">
-        <h1 className="text-[#ffffff] dark:text-[#646464] md:text-2xl text-2xl font-semibold  border border-black sm:w-[98vw] w-[98vw] md:py-4 py-2 px-2 rounded-md dark:bg-bgInDark bg-[#654A4E] transition-all duration-300 flex justify-center">
-          My To-Dos
-          <svg
-            className="w-8 ml-1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
+      {!isRunning ? (
+        <div className="flex mt-4 w-[98vw] justify-around rounded-md dark:bg-bgInDark bg-[#654A4E] transition-all duration-300 border border-black items-center">
+          <h1 className="text-[#ffffff] dark:text-[#646464] md:text-5xl text-3xl font-semibold transition-all duration-300  md:py-4 py-2 px-2 gap-2 font-[rancho]">
+            My To-Dos
+          </h1>
+          <div
+            className="flex justify-center items-center cursor-pointer font-[quantico] text-lg sm:text-2xl text-[#ffffff] dark:text-[#646464] transition-all duration-300 md:py-4 py-2 px-2 gap-1 font-bold"
+            onClick={handleTimer}
           >
-            <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12H4C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C9.25022 4 6.82447 5.38734 5.38451 7.50024L8 7.5V9.5H2V3.5H4L3.99989 5.99918C5.82434 3.57075 8.72873 2 12 2ZM13 7L12.9998 11.585L16.2426 14.8284L14.8284 16.2426L10.9998 12.413L11 7H13Z"></path>
-          </svg>
-        </h1>
-      </div>
+            ST
+            <svg
+              className="w-6 sm:w-8 "
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12H4C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C9.25022 4 6.82447 5.38734 5.38451 7.50024L8 7.5V9.5H2V3.5H4L3.99989 5.99918C5.82434 3.57075 8.72873 2 12 2ZM13 7L12.9998 11.585L16.2426 14.8284L14.8284 16.2426L10.9998 12.413L11 7H13Z"></path>
+            </svg>
+            PWatch
+            {/* {isRunning && <Timer />} */}
+          </div>
+        </div>
+      ) : (
+        <div className="flex mt-4 w-[98vw] justify-around rounded-md dark:bg-bgInDark bg-[#654A4E] transition-all duration-300 border border-black  md:py-8 py-2 px-2 items-center">
+          <Timer />
+          <h1
+            className="text-[#ffffff] dark:text-[#646464] md:text-5xl text-3xl font-semibold transition-all duration-300  md:py-4 py-2 px-2 gap-2 font-[rancho] cursor-pointer "
+            onClick={handleTimer}
+          >
+            My To-Dos
+          </h1>
+        </div>
+      )}
+
       <TodoTasks
         searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
         allTodos={allTodos}
-        createTodo={createTodo}
-        todoId={todoId}
-        searchParams={searchParams}
         setSearchParams={setSearchParams}
         inputRef={inputRef}
+        setInputHightlight={setInputHightlight}
       />
     </div>
   );

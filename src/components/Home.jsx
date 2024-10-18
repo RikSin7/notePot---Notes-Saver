@@ -48,35 +48,35 @@ function Home() {
     }
   };
   return (
-    <div className="mt-16 w-[98vw] transition-colors duration-300">
-      <h1 className="font-[rancho] md:text-7xl text-4xl flex justify-center text-center text-[#654A4E] py-4">
+    <div className="mt-16 w-[98vw] transition-bg duration-300">
+      <h1 className="font-[rancho] md:text-7xl text-4xl flex justify-center text-center text-[#ffffff] dark:text-[#646464] py-4 sm:py-8 transition-all duration-300">
         Note Pot
       </h1>
-      <div className="flex flex-row xs:flex-col my-4 justify-between gap-4 ">
+      <div className="flex sm:flex-row sm:justify-around flex-col justify-between gap-4 ">
         <div className="input">
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Untitled Note"
-            className="placeholder:text-[#c5c0c0] border border-[#2a2a2a] min-w-[20vw] px-2 sm:py-3 py-2 rounded-md outline-none dark:bg-bgInDark xs:w-full transition-bg duration-300"
+            className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full flex-col justify-center bg-[#ffffff] outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959] relative z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.95] hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 w-full font-[600] placeholder:font-normal"
           />
         </div>
         <button
-          className="bg-[#654A4E] px-5 sm:py-3 py-2 rounded-md border border-[#323232] min-w-[10vw] cursor-pointer text-white active:scale-90 transition-colors duration-300"
+          className="min-w-[30vw] text-center dark:bg-[#121212] dark:border-black border-none sm:p-4 p-2 rounded-full justify-center font-[silkScreen] bg-[#fff] outline-none hover:outline-[#825a5a] relative z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300"
           onClick={createPaste}
         >
           {pasteId ? "Update note" : "Create note"}
         </button>
       </div>
-      <div className="textArea mt-8">
+      <div className="textArea mt-8 sm:mt-16 flex justify-center">
         <textarea
           cols="30"
           rows="10"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder={`Enter description here...`}
-          className="placeholder:text-[#c5c0c0] brounded-md  border border-[#353535] dark:bg-bgInDark px-2 outline-none placeholder:text-lg dark:text-white w-full transition-bg duration-300 h-[50vh]"
+          className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black sm:p-4 p-2 rounded-2xl my-4 mt-6 flex-col justify-center  bg-[#ffffff] outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  relative z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.98] hover:scale-[0.95]  active:duration-300 placeholder:text-[14px] transition-all duration-300 min-h-[40vh] sm:w-[80vw] w-full"
         ></textarea>
       </div>
     </div>

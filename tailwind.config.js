@@ -12,15 +12,15 @@ export default {
         bgInDark: '#2D3031'
       },
       fontFamily: {
-        rancho: ['Rancho', 'sans-serif']
+        rancho: ['Rancho', 'sans-serif'],
       },
       screens: {
         xs: { max: '410px' },
-        xss: {max: '360px'}
+        xss: { max: '360px' }
       },
       transitionProperty: {
-        bg: 'background-color' 
-      },
+        bg: 'background-color'
+      }
     }
   },
   plugins: []

@@ -16,25 +16,24 @@ function ViewPaste() {
   }
 
   return (
-    <div className="mt-16  flex flex-col items-center w-full relative transition-bg duration-300">
-      <div className="my-4 gap-4">
-        <div className="input">
-          <input
-            type="text"
-            value={paste.title} // Access the title property correctly
-            className="border border-[#616161]  px-2 sm:py-3 py-2 rounded-md outline-none dark:bg-bgInDark min-w-[90vw]  sm:min-w-[90vw] md:min-w-[70vw] transition-bg duration-300"
-            readOnly
-          />
+    <div className="mt-16 flex flex-col items-center max-w-[98vw] relative min-h-screen transition-bg duration-300 text-wrap">
+      <h1 className="sm:my-[10vh] my-[5vh] font-[rancho] font-bold sm:text-5xl text-3xl text-[#ffffff] dark:text-[#646464] transition-all duration-300 text-center">
+        You write Awesome notes.
+      </h1>
+      <div className="mb-4">
+        <div className="title flex min-w-[50vw]  max-w-[98vw]">
+          <h1 className=" xss:w-full text-center dark:bg-[#121212] dark:border-black border-none sm:p-4 p-2 rounded-full justify-center  bg-[#fff] outline-none hover:outline-[#825a5a] z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.98] sm:active:scale-[1.02] active:scale-[1.05] active:duration-300 transition-all duration-300 w-full">
+            {paste.title}
+          </h1>
         </div>
       </div>
-      <div className="textArea">
-        <textarea
-          cols="30"
-          rows="10"
-          value={paste.description} // Access the description property correctly
-          className="border border-[#353535] dark:bg-bgInDark px-2 outline-none placeholder:text-lg dark:text-[#ffffff] min-w-[90vw] sm:min-w-[90vw] min-h-[70vh] md:min-w-[70vw] transition-bg duration-300 md:text-lg"
-          readOnly
-        ></textarea>
+      <div className="desc flex min-w-[50vw] relative max-w-[98vw]">
+        <p
+          className="text-center dark:bg-[#121212] dark:border-black border-none sm:p-4 p-2 rounded-2xl justify-center  bg-[#fff] outline-none hover:outline-[#825a5a] z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.98] sm:active:scale-[1.02] active:scale-[1.05] active:duration-300 transition-all duration-300 w-full"
+          style={{ whiteSpace: "pre-wrap" }}
+        >
+          {paste.description}
+        </p>
       </div>
     </div>
   );
