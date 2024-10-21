@@ -99,7 +99,7 @@ function Pastes() {
         placeholder="Search My Notes..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 justify-center placeholder:text-center text-center  bg-[#ffffff] outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  relative z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 hover:scale-[0.90]"
+        className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 justify-center placeholder:text-center text-center  bg-inputBg  outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 hover:scale-[0.90]"
       />
       <div className="flex mt-4">
         <h1 className="text-[#ffffff] dark:text-[#646464] md:text-5xl text-3xl font-semibold  border border-black w-[98vw] md:py-4 py-2 px-2 rounded-md dark:bg-bgInDark bg-[#654A4E] transition-all duration-300 flex justify-center gap-2 font-[rancho]">
@@ -118,10 +118,10 @@ function Pastes() {
         {sortedPastes.length > 0 ? (
           sortedPastes.map((paste) => (
             <div
-              className={`border border-[#805151] dark:border-[black] rounded-md py-2 px-4 flex flex-col overflow-y-auto w-[98vw] relative placeholder:font-[silkScreen] min-w-[30vw] dark:bg-[#121212] sm:p-4 p-2 justify-center bg-[#ffffff] outline-none sm:placeholder:text-base placeholder:text-[#9e5959] z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.99] hover:scale-[0.98] active:duration-300 placeholder:text-[14px] transition-all duration-300 -mb-1  ${
+              className={`border border-[#805151] dark:border-[black] rounded-md py-2 px-4 flex flex-col overflow-y-auto w-[98vw] placeholder:font-[silkScreen] min-w-[30vw] dark:bg-[#121212] sm:p-4 p-2 justify-center bg-inputBg  outline-none sm:placeholder:text-base placeholder:text-[#9e5959] sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.99] hover:scale-[0.98] active:duration-300 placeholder:text-[14px] transition-all duration-300 -mb-1  ${
                 highlightPaste === paste._id
-                  ? "bg-[#b5c4d6] dark:bg-[#1f2122] scale-[1.02] transition-all duration-500"
-                  : "dark:bg-bgInDark bg-[#EFF4F5] transition-all duration-300"
+                  ? "bg-[#ffffff] dark:bg-[#1f2122] scale-[1.02] transition-all duration-500"
+                  : "dark:bg-bgInDark bg-inputBg  transition-all duration-300"
               }`}
               ref={(el) => (pasteRefs.current[paste._id] = el)}
               key={paste._id}
@@ -132,13 +132,13 @@ function Pastes() {
                 </div>
                 <span className="flex gap-[10px] sm:gap-[19px] sm:text-lg text-sm h-max items-center justify-center mt-2">
                   <div
-                    className="pin/unpin relative group flex items-center "
+                    className="pin/unpin group flex items-center relative"
                     onClick={(e) => e.stopPropagation()}
                   >
                     {/* Pin/unpin button */}
                     <button
                       onClick={() => handleTogglePin(paste._id)}
-                      className="relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100"
+                      className="  sm:transition-transform sm:duration-100 sm:ease-in-out sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100"
                     >
                       {paste.pinned ? (
                         <svg
@@ -171,8 +171,8 @@ function Pastes() {
                   </div>
 
                   {/* Edit Button with Tooltip */}
-                  <div className="edit relative group flex items-center">
-                    <button className="edit relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100">
+                  <div className="edit  group flex items-center relative">
+                    <button className="edit   sm:transition-transform sm:duration-100 sm:ease-in-out sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100">
                       <NavLink to={`/?pasteId=${paste._id}`}>
                         <svg
                           className="edit w-6"
@@ -188,8 +188,8 @@ function Pastes() {
                   </div>
 
                   {/* View Button with Tooltip */}
-                  <div className="view relative group flex items-center">
-                    <button className=" relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100">
+                  <div className="view  group flex items-center relative">
+                    <button className="   sm:transition-transform sm:duration-100 sm:ease-in-out sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100">
                       <NavLink to={`/pastes/${paste._id}`}>
                         <svg
                           className="w-6"
@@ -205,10 +205,10 @@ function Pastes() {
                   </div>
 
                   {/* Copy Button with Tooltip */}
-                  <div className="copy relative group flex items-center">
+                  <div className="copy  group flex items-center relative">
                     <button
                       onClick={() => handleCopy(paste)}
-                      className=" relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100"
+                      className="   sm:transition-transform sm:duration-100 sm:ease-in-out sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100"
                     >
                       <svg
                         className="w-6"
@@ -223,10 +223,10 @@ function Pastes() {
                   </div>
 
                   {/* Delete Button with Tooltip */}
-                  <div className="delete relative group flex items-center">
+                  <div className="delete  group flex items-center relative">
                     <button
                       onClick={() => handleDelete(paste._id)}
-                      className=" relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100"
+                      className="   sm:transition-transform sm:duration-100 sm:ease-in-out sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100"
                     >
                       <svg
                         className="w-6"
@@ -241,10 +241,10 @@ function Pastes() {
                   </div>
 
                   {/* Share Button with Tooltip */}
-                  <div className="share relative group flex items-center">
+                  <div className="share  group flex items-center relative">
                     <button
                       onClick={() => handleShare(paste)}
-                      className=" relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100"
+                      className="   sm:transition-transform sm:duration-100 sm:ease-in-out sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100"
                     >
                       <svg
                         className="w-6"
@@ -291,7 +291,7 @@ function Pastes() {
       {allPastes.length > 2 && !searchTerm && (
         <div className="flex justify-center">
           <button
-            className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center bg-[#ffffff] transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8 text-[14px] sm:text-base text-[#9e5959] px-8 relative z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300"
+            className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center bg-inputBg transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8 text-[14px] sm:text-base text-[#9e5959] px-8  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300"
             onClick={handleResetAll}
           >
             Reset All Notes !!!

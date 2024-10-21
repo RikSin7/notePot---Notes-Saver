@@ -122,9 +122,9 @@ function TodoTasks({
         sortedTodos.map((todo) => (
           <ul
             ref={(el) => (todoRefs.current[todo._id] = el)}
-            className={`border border-[#805151] dark:border-[black] rounded-md py-2 px-4 flex flex-col overflow-y-auto w-[98vw] mb-1 relative placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] sm:p-4 p-2   justify-center bg-[#ffffff] outline-none sm:placeholder:text-base placeholder:text-[#9e5959] z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.99] hover:scale-[0.98] active:duration-300 placeholder:text-[14px] transition-all duration-300 ${
+            className={`border border-[#805151] dark:border-[black] rounded-md py-2 px-4 flex flex-col overflow-y-auto w-[98vw] mb-1  placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] sm:p-4 p-2   justify-center bg-inputBg  outline-none sm:placeholder:text-base placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.99] hover:scale-[0.98] active:duration-300 placeholder:text-[14px] transition-all duration-300 ${
               highlightedTodo === todo._id
-                ? "bg-[#b5c4d6] dark:bg-[#1f2122] scale-[1.02] transition-all duration-500"
+                ? "bg-[#ffffff] dark:bg-[#1f2122] scale-[1.02] transition-all duration-500"
                 : "dark:bg-bgInDark bg-[#D9DFE9] transition-all duration-300"
             }`}
             onClick={() => handleToggleCompletion(todo._id)}
@@ -167,9 +167,9 @@ function TodoTasks({
                 </span>
                 {todo.title}
               </li>
-              <span className="flex sm:gap-2 gap-[2px] sm:mt-[10px] mt-[5px] z-10">
+              <span className="flex sm:gap-2 gap-[2px] sm:mt-[10px] mt-[5px]">
                 <div
-                  className="pin/unpin relative group flex items-center "
+                  className="pin/unpin  group flex items-center relative"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* Pin/unpin button */}
@@ -178,7 +178,7 @@ function TodoTasks({
                       e.stopPropagation();
                       handleTogglePin(todo._id);
                     }}
-                    className="relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100 px-2 py-1"
+                    className="sm:transition-transform sm:duration-100 sm:ease-in-out sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100 px-2 py-1"
                   >
                     {todo.pinned ? (
                       <svg
@@ -209,11 +209,11 @@ function TodoTasks({
                   ></span>
                 </div>
                 <div
-                  className="edit relative group flex items-center"
+                  className="edit group flex items-center relative"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <button
-                    className={`edit relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100 py-1 px-2 `}
+                    className={`edit sm:transition-transform sm:duration-100 sm:ease-in-out sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100 py-1 px-2 `}
                     onClick={(e) => handleEditClick(e, todo._id)}
                   >
                     <NavLink to={`/todoinput`}>
@@ -232,11 +232,11 @@ function TodoTasks({
                   ></span>
                 </div>
                 <div
-                  className="copy relative group flex items-center"
+                  className="copy  group flex items-center relative"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <button
-                    className="copy relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100 py-1 px-2"
+                    className="copy   sm:transition-transform sm:duration-100 sm:ease-in-out sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100 py-1 px-2"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleCopy(todo);
@@ -256,11 +256,11 @@ function TodoTasks({
                   ></span>
                 </div>
                 <div
-                  className="delete relative group flex items-center"
+                  className="delete  group flex items-center relative"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <button
-                    className="delete relative z-10 sm:transition-transform sm:duration-100 sm:ease-in-out sm:transform sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100 py-1 px-2"
+                    className="delete  sm:transition-transform sm:duration-100 sm:ease-in-out sm:hover:scale-75 sm:active:scale-125 active:scale-150 active:duration-100 py-1 px-2"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleDelete(todo._id);
@@ -307,7 +307,7 @@ function TodoTasks({
       {allTodos.length > 2 && !searchTerm && (
         <div className="flex justify-center mt-6 w-full">
           <button
-            className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center bg-[#ffffff] transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8 text-[14px] sm:text-base text-[#9e5959] px-8 relative z-10 sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300"
+            className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center bg-inputBg  transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8 text-[14px] sm:text-base text-[#9e5959] px-8  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300"
             onClick={handleResetAll}
           >
             Reset All TO-DOs !!!

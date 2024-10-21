@@ -9,5 +9,5 @@
 }
 
 .highlight-unpinned {
-  @apply transition-all duration-300 bg-[#b5c4d6] dark:bg-[#1f2122] scale-[1.02];
+  @apply transition-all duration-300 bg-[#ffffff] dark:bg-[#1f2122] scale-[1.02];
 }
