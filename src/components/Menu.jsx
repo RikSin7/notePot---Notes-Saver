@@ -70,7 +70,7 @@ function Menu({ handleLogout }) {
                 value={newUsername}
                 onChange={(e) => setNewUsername(e.target.value)}
                 placeholder="New username"
-                className={`placeholder:font-[Quantico] dark:bg-darkBg dark:border-black border border-[#c5c5c5] sm:p-2 p-2 sm:px-4 rounded-full flex-col justify-center bg-inputBg  outline-none hover:outline-[#825a5a] sm:placeholder:text-sm placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 min-w-[15vw] placeholder:text-center`}
+                className={`placeholder:font-[Quantico] dark:bg-darkBg dark:border-black border border-[#c5c5c5] sm:p-2 p-2 sm:px-4 rounded-full flex-col justify-center bg-[#fff] outline-none hover:outline-[#825a5a] sm:placeholder:text-sm placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 min-w-[15vw] placeholder:text-center text-center`}
               />
               <button
                 className="text-center font-[silkScreen] sm:hover:transition-colors hover:duration-300  active:text-[#8d5353] sm:hover:text-[#8d5353] active:duration-0 transition-bg duration-300"
@@ -80,9 +80,32 @@ function Menu({ handleLogout }) {
               </button>
             </div>
           )}
-          <div className="flex">
+          <div className="flex gap-2 group">
+            {!isChangingUsername ? (
+              <span>
+                <svg
+                  className="sm:w-6 w-5 sm:hover:transition-bg hover:duration-300 font-semibold rounded-full group-active:text-[#8d5353] active:duration-0 sm:group-hover:text-[#8d5353] group active:transition-bg"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M6.41421 15.89L16.5563 5.74785L15.1421 4.33363L5 14.4758V15.89H6.41421ZM7.24264 17.89H3V13.6473L14.435 2.21231C14.8256 1.82179 15.4587 1.82179 15.8492 2.21231L18.6777 5.04074C19.0682 5.43126 19.0682 6.06443 18.6777 6.45495L7.24264 17.89ZM3 19.89H21V21.89H3V19.89Z"></path>
+                </svg>
+              </span>
+            ) : (
+              <span>
+                <svg
+                  className="sm:w-6 w-5 sm:hover:transition-bg hover:duration-300 font-semibold rounded-full group-active:text-[#8d5353] active:duration-0 sm:group-hover:text-[#8d5353] group active:transition-bg"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM12 10.5858L14.8284 7.75736L16.2426 9.17157L13.4142 12L16.2426 14.8284L14.8284 16.2426L12 13.4142L9.17157 16.2426L7.75736 14.8284L10.5858 12L7.75736 9.17157L9.17157 7.75736L12 10.5858Z"></path>
+                </svg>
+              </span>
+            )}
             <button
-              className="sm:hover:transition-colors hover:duration-300  active:text-[#8d5353] sm:hover:text-[#8d5353] active:duration-0"
+              className="sm:hover:transition-bg hover:duration-300 font-semibold rounded-full group-active:text-[#8d5353] active:duration-0 sm:group-hover:text-[#8d5353] group"
               onClick={handleInputToggle}
             >
               {isChangingUsername ? "Cancel changing" : "Change username"}
@@ -90,10 +113,10 @@ function Menu({ handleLogout }) {
           </div>
           <div className="flex gap-2 group">
             <svg
+              className="sm:w-6 w-5 sm:hover:transition-bg hover:duration-300 font-semibold rounded-full group-active:text-[#8d5353] active:duration-0 sm:group-hover:text-[#8d5353] group active:transition-bg"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-6 sm:hover:transition-bg hover:duration-300 font-semibold rounded-full group-active:text-[#8d5353] active:duration-0 sm:group-hover:text-[#8d5353] group active:transition-bg"
               onClick={handleLogout}
             >
               <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C15.2713 2 18.1757 3.57078 20.0002 5.99923L17.2909 5.99931C15.8807 4.75499 14.0285 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C14.029 20 15.8816 19.2446 17.2919 17.9998L20.0009 17.9998C18.1765 20.4288 15.2717 22 12 22ZM19 16V13H11V11H19V8L24 12L19 16Z"></path>

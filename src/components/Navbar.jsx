@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleDarkMode } from "../redux/darkModeSlice";
 import { logout } from "../redux/authSlice";
 import Menu from "./Menu";
-import Login from "./auth/Login";
 
 function Navbar() {
   const navigate = useNavigate();
