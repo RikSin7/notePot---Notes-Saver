@@ -23,6 +23,7 @@ function Login() {
     const user = { username, password }; // User input for login
 
     try {
+      console.log("login called");
       dispatch(login(user)); // Try to log in
       navigate("/"); // Redirect to home page after successful login
     } catch (error) {
