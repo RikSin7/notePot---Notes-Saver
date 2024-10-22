@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { addToPastes, updateToPastes } from "../redux/pasteSlice";
 import Login from "./auth/Login";
+import { setUserFromLocalStorage } from "../redux/authSlice";
 function Home() {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
@@ -12,7 +13,19 @@ function Home() {
   const allPastes = useSelector((state) => state.paste.pastes);
 
   const user = useSelector((state) => state.auth.user);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   // If pasteId exists, find the paste and pre-fill the form fields
+
+  useEffect(() => {
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    // Only set user in Redux state if they are logged in
+    if (savedUser && isLoggedIn === "true") {
+      dispatch(setUserFromLocalStorage(savedUser));
+    }
+  }, [dispatch]);
+
   useEffect(() => {
     if (pasteId) {
       const pasteToEdit = allPastes.find((paste) => paste._id === pasteId);
@@ -51,7 +64,7 @@ function Home() {
   };
   return (
     <>
-      {user ? (
+      {isAuthenticated ? (
         <div className="mt-16 w-[98vw] transition-bg duration-300">
           <div className="font-[rancho] flex-col md:text-7xl text-4xl flex justify-center text-center text-[#fff] dark:text-[#646464] py-4 sm:py-8 transition-all duration-300">
             <h1>Welcome, {user ? user.username : "Guest"}</h1>

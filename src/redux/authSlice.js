@@ -5,12 +5,17 @@ const initialState = {
   user: localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : null,
+  isAuthenticated: localStorage.getItem("isLoggedIn") === "true", // Track auth status
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    setUserFromLocalStorage: (state, action) => {
+      // Set the user in the Redux state from localStorage
+      state.user = action.payload;
+    },
     changeUsername: (state, action) => {
       const newUsername = action.payload;
 
@@ -25,43 +30,41 @@ const authSlice = createSlice({
     },
     login: (state, action) => {
       const { username, password } = action.payload;
-
-      // Check if user exists in local storage
       const existingUser = JSON.parse(localStorage.getItem("user"));
 
-      // If user exists, compare credentials
       if (
         existingUser &&
         existingUser.username === username &&
         existingUser.password === password
       ) {
-        state.user = existingUser; // Set the user state
-      toast.success("Login successful.");
-
+        state.user = existingUser; // Set user in Redux state
+        state.isAuthenticated = true; // Set auth status to true
+        localStorage.setItem("isLoggedIn", "true"); // Update auth status in localStorage
+        toast.success("Login successful.");
       } else {
-        // Handle failed login attempt
         throw new Error("Invalid credentials. Please sign up or try again.");
       }
     },
     logout: (state) => {
-      // Retain the user's credentials (email, username, and password) in localStorage
       const existingUser = JSON.parse(localStorage.getItem("user"));
-    
-      // Clear only the Redux state (log the user out)
-      state.user = { email: existingUser.email }; // Keep only email in Redux state
-      toast.success("Logout successful.");
-      // Optionally, you can keep localStorage unchanged if you want to retain the full user credentials
+
+      if (existingUser) {
+        state.user = null; // Clear user from state
+        state.isAuthenticated = false; // Set auth status to false
+        localStorage.setItem("isLoggedIn", "false"); // Update auth status in localStorage
+        toast.success("Logout successful.");
+      }
     },
-    
-    
+
     signup: (state, action) => {
       const { username, password, email } = action.payload;
 
       // Save user data to state
       state.user = { username, password, email };
-      localStorage.setItem("user", JSON.stringify(state.user));
+      state.isAuthenticated = true; // Set authenticated state to true
+      localStorage.setItem("user", JSON.stringify(state.user)); // Store user data in local storage
+      localStorage.setItem("isLoggedIn", "true"); // Set login status in localStorage
       toast.success("Sign up successful.");
-
     },
     resetPassword: (state, action) => {
       const { email, newPassword } = action.payload;
@@ -80,6 +83,12 @@ const authSlice = createSlice({
   },
 });
 
-export const { changeUsername, login, logout, signup, resetPassword } =
-  authSlice.actions;
+export const {
+  setUserFromLocalStorage,
+  changeUsername,
+  login,
+  logout,
+  signup,
+  resetPassword,
+} = authSlice.actions;
 export default authSlice.reducer;

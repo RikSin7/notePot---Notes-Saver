@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleDarkMode } from "../redux/darkModeSlice";
 import { logout } from "../redux/authSlice";
 import Menu from "./Menu";
+import Login from "./auth/Login";
 
 function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isDarkMode = useSelector((state) => state.darkMode.isDarkMode);
-  const user = useSelector((state) => state.auth.user); // Get user from Redux
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
 
   const handleLogout = () => {
     const confirmed = window.confirm("Are you sure to logout?");
@@ -21,7 +23,7 @@ function Navbar() {
 
   return (
     <nav>
-      {user && (
+      {isAuthenticated ? (
         <div className="flex justify-around bg-[#f8eeee] dark:bg-[#2D3031] rounded-md py-4 w-full absolute left-[50%] translate-x-[-50%] text-black dark:text-white transition-colors duration-300">
           <NavLink
             to="/"
@@ -90,6 +92,8 @@ function Navbar() {
 
           <Menu handleLogout={handleLogout} />
         </div>
+      ) : (
+        <Login />
       )}
     </nav>
   );
