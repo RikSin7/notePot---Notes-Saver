@@ -60,7 +60,7 @@ function Menu({ handleLogout }) {
       </button>
       {isOpen && (
         <div
-          className="options fixed right-0 top-[57px] sm:top-[61px] rounded-l-lg px-4 py-4 flex flex-col items-start gap-3 dark:bg-[#121212] dark:border-black border-none sm:p-4 p-2 justify-center bg-[#F8EEEE] outline-none  sm:transition-bg sm:duration-300 sm:ease-in-out  transition-bg duration-300 shadow-lg dark:shadow-[#7c4545] shadow-[#7c4646]"
+          className="options fixed right-0 top-[57px] sm:top-[61px] rounded-l-lg px-4 py-4 flex flex-col items-start gap-3 dark:bg-[#181818]  sm:p-4 p-2 justify-center bg-[#ffffff] outline-none  sm:transition-bg sm:duration-300 sm:ease-in-out  transition-bg duration-300 dark:border-[#000000] border border-[#5a5a5a]"
           ref={menuRef}
         >
           {isChangingUsername && (
@@ -70,7 +70,7 @@ function Menu({ handleLogout }) {
                 value={newUsername}
                 onChange={(e) => setNewUsername(e.target.value)}
                 placeholder="New username"
-                className={`placeholder:font-[Quantico] dark:bg-darkBg dark:border-black border border-[#c5c5c5] sm:p-2 p-2 sm:px-4 rounded-full flex-col justify-center bg-[#fff] outline-none hover:outline-[#825a5a] sm:placeholder:text-sm placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 min-w-[15vw] placeholder:text-center text-center`}
+                className={`placeholder:font-[Quantico] dark:bg-darkBg dark:border-[#c2bfbf] border border-[#5c5c5c] sm:p-2 p-2 sm:px-4 rounded-full flex-col justify-center bg-[#ffffff] outline-none sm:placeholder:text-sm placeholder:text-[#000000]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 min-w-[15vw] placeholder:text-center text-center dark:placeholder:text-[#ffffff]`}
               />
               <button
                 className="text-center font-[silkScreen] sm:hover:transition-colors hover:duration-300  active:text-[#8d5353] sm:hover:text-[#8d5353] active:duration-0 transition-bg duration-300"
@@ -84,7 +84,7 @@ function Menu({ handleLogout }) {
             {!isChangingUsername ? (
               <span>
                 <svg
-                  className="sm:w-6 w-5 sm:hover:transition-bg hover:duration-300 font-semibold rounded-full group-active:text-[#8d5353] active:duration-0 sm:group-hover:text-[#8d5353] group active:transition-bg"
+                  className="sm:w-6 w-5 sm:hover:transition-bg hover:duration-300 rounded-full group-active:text-[#8d5353] group-active:duration-100 sm:group-hover:text-[#8d5353] group active:transition-bg"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -95,7 +95,7 @@ function Menu({ handleLogout }) {
             ) : (
               <span>
                 <svg
-                  className="sm:w-6 w-5 sm:hover:transition-bg hover:duration-300 font-semibold rounded-full group-active:text-[#8d5353] active:duration-0 sm:group-hover:text-[#8d5353] group active:transition-bg"
+                  className="sm:w-6 w-5 sm:hover:transition-bg hover:duration-300 rounded-full group-active:text-[#8d5353] group-active:duration-100 sm:group-hover:text-[#8d5353] group active:transition-bg"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -105,7 +105,7 @@ function Menu({ handleLogout }) {
               </span>
             )}
             <button
-              className="sm:hover:transition-bg hover:duration-300 font-semibold rounded-full group-active:text-[#8d5353] active:duration-0 sm:group-hover:text-[#8d5353] group"
+              className="sm:hover:transition-bg hover:duration-300  rounded-full group-active:text-[#8d5353] group-active:duration-100 sm:group-hover:text-[#8d5353] group"
               onClick={handleInputToggle}
             >
               {isChangingUsername ? "Cancel changing" : "Change username"}
@@ -113,7 +113,7 @@ function Menu({ handleLogout }) {
           </div>
           <div className="flex gap-2 group">
             <svg
-              className="sm:w-6 w-5 sm:hover:transition-bg hover:duration-300 font-semibold rounded-full group-active:text-[#8d5353] active:duration-0 sm:group-hover:text-[#8d5353] group active:transition-bg"
+              className="sm:w-6 w-5 sm:hover:transition-bg hover:duration-300 rounded-full group-active:text-[#8d5353] group-active:duration-100 sm:group-hover:text-[#8d5353] group active:transition-bg"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
@@ -123,7 +123,7 @@ function Menu({ handleLogout }) {
             </svg>
             <button
               onClick={handleLogout}
-              className="sm:hover:transition-bg hover:duration-300 font-semibold rounded-full group-active:text-[#8d5353] active:duration-0 sm:group-hover:text-[#8d5353] group"
+              className="sm:w-6 w-5 sm:hover:transition-bg hover:duration-300 rounded-full group-active:text-[#8d5353] group-active:duration-100 sm:group-hover:text-[#8d5353] group active:transition-bg font-semibold"
             >
               Logout
             </button>

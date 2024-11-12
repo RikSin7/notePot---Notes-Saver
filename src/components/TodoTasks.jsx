@@ -82,7 +82,9 @@ function TodoTasks({
     navigator.clipboard
       .writeText(todoContent)
       .then(() => {
-        toast.success("Copied to clipboard!");
+        toast.success("Copied to clipboard!", {
+          icon: "📋",
+        });
       })
       .catch(() => {
         toast.error("Failed to copy!");

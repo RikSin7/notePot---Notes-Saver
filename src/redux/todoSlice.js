@@ -17,15 +17,21 @@ const todoSlice = createSlice({
         (t) => t.title.toLowerCase() === todo.title.toLowerCase()
       );
       if (existingTodo) {
-        toast.error("Todo already exists!");
+        toast.error("Todo already exists!", {
+          icon: "❗",
+        });
         return;
       } else if (!todo.title.trim()) {
-        toast.error("Add a to-do first!");
+        toast.error("Add a to-do first!", {
+          icon: "❗",
+        });
         return;
       } else {
         state.todos.push(todo);
         localStorage.setItem("todos", JSON.stringify(state.todos));
-        toast.success("To-do created.");
+        toast.success("To-do created.", {
+          icon: "🎯",
+        });
       }
     },
 
@@ -34,7 +40,9 @@ const todoSlice = createSlice({
       const index = state.todos.findIndex((t) => t._id === updatedTodo._id);
       if (index !== -1) {
         if (!updatedTodo.title.trim()) {
-          toast.error("Add a to-do to update!");
+          toast.error("Add a to-do to update!", {
+            icon: "❗",
+          });
           return;
         } else {
           state.todos[index] = updatedTodo;
@@ -42,7 +50,9 @@ const todoSlice = createSlice({
           toast.success("To-do updated.");
         }
       } else {
-        toast.error("To-do not found for updating!");
+        toast.error("To-do not found for updating!", {
+          icon: "❗",
+        });
       }
     },
 
@@ -54,6 +64,7 @@ const todoSlice = createSlice({
         localStorage.setItem("todos", JSON.stringify(state.todos));
         toast.success(todo.pinned ? "To-do pinned." : "To-do unpinned.", {
           position: todo.pinned ? "bottom-center" : "top-center",
+          icon: todo.pinned ? "📌" : "📌",
         });
       }
     },
@@ -74,13 +85,17 @@ const todoSlice = createSlice({
       const id = action.payload;
       state.todos = state.todos.filter((todo) => todo._id !== id);
       localStorage.setItem("todos", JSON.stringify(state.todos));
-      toast.success("To-do removed.");
+      toast.success("To-do removed.", {
+        icon: "🧹",
+      });
     },
 
     resetAllTodo: (state) => {
       state.todos = [];
       localStorage.removeItem("todos");
-      toast.success("All TO-DOs have been reset. ");
+      toast.success("All TO-DOs have been reset. ", {
+        icon: "🚀",
+      });
     },
   },
 });

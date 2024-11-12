@@ -63,7 +63,9 @@ function Pastes() {
       .writeText(linkToCopy)
       .then(() => {
         // Notify success
-        toast.success("Share Link copied to clipboard!");
+        toast.success("Share Link copied to clipboard!", {
+          icon: "🔗",
+        });
       })
       .catch(() => {
         // Notify failure
@@ -76,7 +78,9 @@ function Pastes() {
     navigator.clipboard
       .writeText(pasteContent)
       .then(() => {
-        toast.success("Copied to clipboard!");
+        toast.success("Copied to clipboard!", {
+          icon: "📋",
+        });
       })
       .catch(() => {
         toast.error("Failed to copy!");

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { login, resetPassword, signup } from "../../redux/authSlice";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import CanvasEffect from "../CanvasSpiderWebEffect";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -70,7 +71,8 @@ function Login() {
   };
 
   return (
-    <div className="flex flex-col gap-2 w-full min-h-screen justify-center items-center bg-[#d5b9b9] dark:bg-[#1B1C1E]">
+    <div className="flex flex-col gap-2 w-full min-h-screen justify-center items-center bg-[#d5b9b9] dark:bg-[#1B1C1E] z-[99]">
+      <CanvasEffect />
       <div className="font-[rancho] flex-col md:text-4xl sm:text-3xl xss:text-md text-2xl flex justify-center text-center text-[#ffffff] dark:text-[#646464] py-2 sm:py-4 transition-all duration-300">
         <h1>Write Awsm Notes, TO-DOs</h1>
       </div>
@@ -283,7 +285,7 @@ function Login() {
           <div className="w- flex flex-col">
             <button
               onClick={() => setIsSignup(!isSignup)}
-              className="text-[#954444] dark:text-[#ad5e5e] font-semibold"
+              className="text-[#954444] dark:text-[#ad5e5e] font-semibold bg-transparent p-4"
             >
               {isSignup ? "Login" : "Sign Up"}
             </button>
