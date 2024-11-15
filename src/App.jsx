@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import TodoInput from "./components/TodoInput";
 import Login from "./components/auth/Login";
+import FloatingNote from "./components/FloatingNote";
 
 function App() {
   const router = createBrowserRouter([
@@ -35,6 +36,15 @@ function App() {
         <div>
           <Navbar />
           <ViewPaste />
+        </div>
+      ),
+    },
+    {
+      path: "/pastes/stickynotes",
+      element: (
+        <div>
+          {/* <Navbar /> */}
+          <FloatingNote />
         </div>
       ),
     },

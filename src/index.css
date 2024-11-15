@@ -11,3 +11,6 @@
 .highlight-unpinned {
   @apply transition-all duration-300 bg-[#ffffff] dark:bg-[#1f2122] scale-[1.02];
 }
+foreground {
+  font-family: "Gilroy";
+}

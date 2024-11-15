@@ -4,6 +4,9 @@ import { useSearchParams } from "react-router-dom";
 import { addToPastes, updateToPastes } from "../redux/pasteSlice";
 import Login from "./auth/Login";
 import { setUserFromLocalStorage } from "../redux/authSlice";
+import CanvasEffect from "./CanvasSpiderWebEffect";
+import { motion } from "framer-motion";
+
 function Home() {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
@@ -66,9 +69,16 @@ function Home() {
     <>
       {isAuthenticated ? (
         <div className="mt-16 w-[98vw] transition-bg duration-300">
-          <div className="font-[rancho] flex-col md:text-7xl text-4xl flex justify-center text-center text-[#fff] dark:text-[#646464] py-4 sm:py-8 transition-all duration-300">
+          <CanvasEffect />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5 }}
+            className="font-[rancho] flex-col md:text-7xl text-4xl flex justify-center text-center text-[#fff] dark:text-[#646464] py-4 sm:py-8 transition-colors duration-300"
+          >
             <h1>Welcome, {user ? user.username : "Guest"}</h1>
-          </div>
+          </motion.div>
           <div className="flex sm:flex-row sm:justify-around flex-col justify-between gap-4 ">
             <div className="input">
               <input

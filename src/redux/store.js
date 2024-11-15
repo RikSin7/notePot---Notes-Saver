@@ -4,6 +4,7 @@ import darkModeReducer from './darkModeSlice'
 import todoReducer from './todoSlice'
 import timerReducer from './timerSlice'
 import authReducer from './authSlice'
+import stickyReducer from './stickySlice'
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
     darkMode: darkModeReducer,
     todo: todoReducer,
     timer: timerReducer,
-    auth: authReducer
+    auth: authReducer,
+    sticky: stickyReducer
   }
 })
 

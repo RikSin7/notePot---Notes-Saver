@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeUsername } from "../redux/authSlice";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 function Menu({ handleLogout }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +48,7 @@ function Menu({ handleLogout }) {
     } else toast.error("Enter new username!");
   };
   return (
-    <div className="flex justify-end absolute sm:right-8 right-4  text-nowrap transition-transforduration-300">
+    <div className="flex justify-end absolute sm:right-8 right-4  text-nowrap transition-transform duration-300 z-20">
       <button className="w-6" onClick={handleMenu} ref={buttonRef}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -59,18 +60,22 @@ function Menu({ handleLogout }) {
         </svg>
       </button>
       {isOpen && (
-        <div
-          className="options fixed right-0 top-[57px] sm:top-[61px] rounded-l-lg px-4 py-4 flex flex-col items-start gap-3 dark:bg-[#181818]  sm:p-4 p-2 justify-center bg-[#ffffff] outline-none  sm:transition-bg sm:duration-300 sm:ease-in-out  transition-bg duration-300 dark:border-[#000000] border border-[#5a5a5a]"
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.1 }}
+          className="options fixed right-0 top-[57px] sm:top-[61px] rounded-l-lg px-4 py-4 flex flex-col items-start gap-3 dark:bg-[#181818]  sm:p-4 p-2 justify-center bg-[#ffffff] outline-none  sm:transition-bg sm:duration-300 sm:ease-in-out  transition-bg duration-300 dark:border-[#000000] border border-[#5a5a5a] "
           ref={menuRef}
         >
           {isChangingUsername && (
-            <div className="flex flex-col gap-2 items-center">
+            <motion.div className="flex flex-col gap-2 items-center">
               <input
                 type="text"
                 value={newUsername}
                 onChange={(e) => setNewUsername(e.target.value)}
                 placeholder="New username"
-                className={`placeholder:font-[Quantico] dark:bg-darkBg dark:border-[#c2bfbf] border border-[#5c5c5c] sm:p-2 p-2 sm:px-4 rounded-full flex-col justify-center bg-[#ffffff] outline-none sm:placeholder:text-sm placeholder:text-[#000000]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 min-w-[15vw] placeholder:text-center text-center dark:placeholder:text-[#ffffff]`}
+                className={` dark:bg-darkBg dark:border-[#c2bfbf] border border-[#5c5c5c] sm:p-2 p-2 sm:px-4 rounded-full flex-col justify-center bg-[#ffffff] outline-none sm:placeholder:text-sm placeholder:text-[#000000]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95] active:duration-300 placeholder:text-xm transition-all duration-300 min-w-[15vw] placeholder:text-center text-center dark:placeholder:text-[#ffffff]`}
               />
               <button
                 className="text-center font-[silkScreen] sm:hover:transition-colors hover:duration-300  active:text-[#8d5353] sm:hover:text-[#8d5353] active:duration-0 transition-bg duration-300"
@@ -78,7 +83,7 @@ function Menu({ handleLogout }) {
               >
                 Change
               </button>
-            </div>
+            </motion.div>
           )}
           <div className="flex gap-2 group">
             {!isChangingUsername ? (
@@ -105,7 +110,7 @@ function Menu({ handleLogout }) {
               </span>
             )}
             <button
-              className="sm:hover:transition-bg hover:duration-300  rounded-full group-active:text-[#8d5353] group-active:duration-100 sm:group-hover:text-[#8d5353] group"
+              className="sm:hover:transition-bg hover:duration-300  rounded-full group-active:text-[#8d5353] group-active:duration-100 sm:group-hover:text-[#8d5353] group outline-none"
               onClick={handleInputToggle}
             >
               {isChangingUsername ? "Cancel changing" : "Change username"}
@@ -128,7 +133,7 @@ function Menu({ handleLogout }) {
               Logout
             </button>
           </div>
-        </div>
+        </motion.div>
       )}
     </div>
   );

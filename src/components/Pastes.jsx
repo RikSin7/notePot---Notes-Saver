@@ -7,6 +7,7 @@ import {
   resetAllPastes,
   togglePinPaste,
 } from "../redux/pasteSlice";
+import FloatingNote from "./FloatingNote";
 
 function Pastes() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -101,13 +102,17 @@ function Pastes() {
     <>
       {isAuthenticated ? (
         <div className="flex flex-col items-center mt-16 px-4 w-[98vw]">
-          <input
-            type="text"
-            placeholder="Search My Notes..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 justify-center placeholder:text-center text-center  bg-inputBg  outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 hover:scale-[0.90]"
-          />
+          <div className="flex w-full  justify-center items-center flex-row-reverse gap-4">
+            <input
+              type="text"
+              placeholder="Search My Notes..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="placeholder:font-[silkScreen] min-w-[20vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 justify-center placeholder:text-center text-center  bg-inputBg  outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 hover:scale-[0.90]"
+            />
+            <FloatingNote />
+          </div>
+
           <div className="flex mt-4">
             <h1 className="text-[#ffffff] dark:text-[#646464] md:text-5xl text-3xl font-semibold  border border-black w-[98vw] md:py-4 py-2 px-2 rounded-md dark:bg-bgInDark bg-[#654A4E] transition-all duration-300 flex justify-center gap-2 font-[rancho]">
               My Notes
@@ -308,7 +313,7 @@ function Pastes() {
             </div>
           )}
         </div>
-       ) : (
+      ) : (
         <Login />
       )}
     </>

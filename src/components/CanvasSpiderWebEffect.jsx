@@ -8,7 +8,7 @@ const CanvasEffect = () => {
     const ctx = canvas.getContext("2d");
 
     const particles = [];
-    const maxParticles = 100;
+    const maxParticles = 10;
 
     // Resize the canvas
     const resizeCanvas = () => {

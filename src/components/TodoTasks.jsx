@@ -9,6 +9,7 @@ import {
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import Login from "./auth/Login";
+import CanvasEffect from "./CanvasSpiderWebEffect";
 
 function TodoTasks({
   searchTerm,
@@ -123,6 +124,7 @@ function TodoTasks({
   };
   return (
     <>
+    <CanvasEffect />
       {isAuthenticated ? (
         <div className="flex flex-col items-center mt-8 px-4 w-[98vw]">
           {sortedTodos.length > 0 ? (
