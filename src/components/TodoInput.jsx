@@ -18,8 +18,6 @@ function TodoInput() {
   const [isRunning, setIsRunning] = useState(false);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  console.log(debouncedSearchTerm);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
@@ -88,7 +86,7 @@ function TodoInput() {
               ref={inputRef}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="What's the plan today?"
-              className={`placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full flex-col justify-center bg-inputBg  outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.98] hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 w-full
+              className={` min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full flex-col justify-center bg-inputBg  outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.98] hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 w-full
       ${
         inputHighlight
           ? "transition-all duration-1000  scale-[1.03] outline-[#825a5a] bg-white dark:bg-[#212121]"
@@ -96,7 +94,7 @@ function TodoInput() {
       }`}
             />
             <button
-              className="min-w-[30vw] text-center dark:bg-[#121212] dark:border-black border-none sm:p-4 p-2 rounded-full justify-center font-[silkScreen] bg-inputBg  outline-none hover:outline-[#825a5a]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300  transition-all duration-300"
+              className="min-w-[30vw] text-center dark:bg-[#121212] dark:border-black border-none sm:p-4 p-2 rounded-full justify-center  bg-inputBg  outline-none hover:outline-[#825a5a]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300  transition-all duration-300"
               onClick={createTodo}
             >
               {todoId ? "Update To-do" : "Create To-do"}
@@ -108,7 +106,7 @@ function TodoInput() {
               placeholder="Search My To-do..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 justify-center placeholder:text-center text-center  bg-inputBg  outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]   sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.95] hover:scale-[0.90] active:duration-300 placeholder:text-[14px] transition-all duration-300"
+              className=" min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 justify-center placeholder:text-center text-center  bg-inputBg  outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]   sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.95] hover:scale-[0.90] active:duration-300 placeholder:text-[14px] transition-all duration-300"
             />
           </div>
           {!isRunning ? (

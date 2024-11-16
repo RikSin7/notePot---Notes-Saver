@@ -19,7 +19,6 @@ function Pastes() {
   const [highlightPaste, setHighlightedPaste] = useState(null);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  console.log(debouncedSearchTerm);
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
@@ -27,7 +26,7 @@ function Pastes() {
     return () => {
       clearTimeout(timer);
     };
-  });
+  }, [searchTerm, debouncedSearchTerm]);
 
   useEffect(() => {
     const filteredPastes = allPastes.filter((paste) =>
@@ -113,13 +112,13 @@ function Pastes() {
     <>
       {isAuthenticated ? (
         <div className="flex flex-col items-center mt-16 px-4 w-[98vw]">
-          <div className="flex w-full  justify-center items-center flex-row-reverse gap-4">
+          <div className="flex w-full  justify-center items-center flex-row-reverse ">
             <input
               type="text"
               placeholder="Search My Notes..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="placeholder:font-[silkScreen] min-w-[20vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 justify-center placeholder:text-center text-center  bg-inputBg  outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 hover:scale-[0.90]"
+              className="min-w-[20vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full my-4 mt-6 justify-center placeholder:text-center text-center  bg-inputBg  outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 hover:scale-[0.90]"
             />
             <FloatingNote />
           </div>
@@ -307,7 +306,7 @@ function Pastes() {
             ) : (
               <div className="text-center flex justify-center items-center w-full md:text-5xl  text-3xl text-[#744c4c] dark:text-[#646464] transition-bg duration-300 font-semibold font-[Tangerine]">
                 {searchTerm
-                  ? "No matching notes found!"
+                  ? "No matching note found!"
                   : "No notes created yet!"}{" "}
                 {/* Fallback message */}
               </div>

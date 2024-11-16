@@ -29,7 +29,6 @@ function Login() {
     const user = { username, password }; // User input for login
 
     try {
-      console.log("login called");
       dispatch(login(user)); // Try to log in
       navigate("/"); // Redirect to home page after successful login
     } catch (error) {
@@ -144,7 +143,7 @@ function Login() {
             </div>
           </div>
           <div className="flex  flex-col sm:w-[500px]  w-[70vw] gap-2 ">
-            <span className="flex  text-center dark:bg-[#3b466b] dark:border-black border-none rounded-full justify-center font-[silkScreen] bg-[#965f5f] outline-none  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 gap-0 mt-4 dark:hover:outline-[#7588ae] hover:outline-[#825a5a] text-white px-4">
+            <span className="flex  text-center dark:bg-[#3b466b] dark:border-black border-none rounded-full justify-center  bg-[#965f5f] outline-none  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 gap-0 mt-4 dark:hover:outline-[#7588ae] hover:outline-[#825a5a] text-white px-4">
               <svg
                 className="sm:w-6 w-5 shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
@@ -156,12 +155,12 @@ function Login() {
 
               <button
                 onClick={handleReset}
-                className="text-center sm:p-4 p-3 xs:py-2 rounded-full justify-center font-[silkScreen] bg-transparent outline-none sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 dark:bg-transparent"
+                className="text-center sm:p-4 p-3 xs:py-2 rounded-full justify-center  bg-transparent outline-none sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 dark:bg-transparent"
               >
                 Reset Password
               </button>
             </span>
-            <span className="flex text-center dark:bg-[#3b466b] dark:border-black border-none rounded-full justify-center font-[silkScreen] bg-[#965f5f] outline-none  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 gap-0 dark:hover:outline-[#7588ae]  hover:outline-[#825a5 text-white px-4">
+            <span className="flex text-center dark:bg-[#3b466b] dark:border-black border-none rounded-full justify-center  bg-[#965f5f] outline-none  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 gap-0 dark:hover:outline-[#7588ae]  hover:outline-[#825a5 text-white px-4">
               <svg
                 className="sm:w-6 w-5 shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +171,7 @@ function Login() {
               </svg>
               <button
                 onClick={() => setIsReset(false)}
-                className="text-center sm:p-4 p-3 xs:py-2 rounded-full justify-center font-[silkScreen] bg-transparent outline-none sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 dark:bg-transparent"
+                className="text-center sm:p-4 p-3 xs:py-2 rounded-full justify-center  bg-transparent outline-none sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 dark:bg-transparent"
               >
                 Back to Login
               </button>
@@ -268,7 +267,7 @@ function Login() {
           )}
           <button
             onClick={isSignup ? handleSignup : handleLogin}
-            className="sm:w-[500px] text-center dark:bg-[#3b466b] sm:py-4 py-3 xs:py-2 rounded-full justify-center font-[silkScreen] bg-[#965f5f] outline-none dark:hover:outline-[#7588ae] hover:outline-[#825a5a]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 w-[70vw] mt-4 text-white"
+            className="sm:w-[500px] text-center dark:bg-[#3b466b] sm:py-4 py-3 xs:py-2 rounded-full justify-center bg-[#965f5f] outline-none dark:hover:outline-[#7588ae] hover:outline-[#825a5a]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 w-[70vw] mt-4 text-white"
           >
             {isSignup ? "Sign Up" : "Login"}
           </button>

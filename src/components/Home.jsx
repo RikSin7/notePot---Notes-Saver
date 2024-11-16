@@ -75,7 +75,7 @@ function Home() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.5 }}
-            className="font-[rancho] flex-col md:text-7xl text-4xl flex justify-center text-center text-[#fff] dark:text-[#646464] py-4 sm:py-8 transition-colors duration-300"
+            className="font-rancho flex-col md:text-7xl text-4xl flex justify-center text-center text-[#fff] dark:text-[#646464] py-4 sm:py-8 transition-colors duration-300"
           >
             <h1>Welcome, {user ? user.username : "Guest"}</h1>
           </motion.div>
@@ -86,11 +86,11 @@ function Home() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Untitled Note"
-                className={`placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full flex-col justify-center bg-inputBg outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 w-full   placeholder:font-normal`}
+                className={` min-w-[30vw]  dark:bg-[#121212] dark:border-black border sm:p-4 p-2 rounded-full flex-col justify-center bg-inputBg outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 w-full   placeholder:font-normal`}
               />
             </div>
             <button
-              className="min-w-[30vw] text-center dark:bg-[#121212] dark:border-black border-none sm:p-4 p-2 rounded-full justify-center font-[silkScreen] bg-inputBg outline-none hover:outline-[#825a5a] sm:transition-all sm:duration-300 sm:ease-in-out  sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300"
+              className="min-w-[30vw] text-center dark:bg-[#121212] dark:border-black border-none sm:p-4 p-2 rounded-full justify-center  bg-inputBg outline-none hover:outline-[#825a5a] sm:transition-all sm:duration-300 sm:ease-in-out  sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300"
               onClick={createPaste}
             >
               {pasteId ? "Update note" : "Create note"}
@@ -103,7 +103,7 @@ function Home() {
               value={value}
               onChange={(e) => setValue(e.target.value)}
               placeholder={`Enter description here...`}
-              className="placeholder:font-[silkScreen] min-w-[30vw]  dark:bg-[#121212] dark:border-black sm:p-4 p-2 rounded-2xl my-4 mt-6 flex-col justify-center  bg-inputBg outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959] sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.98] hover:scale-[0.95]  active:duration-300 placeholder:text-[14px] transition-all duration-300 min-h-[40vh] sm:w-[80vw] w-full"
+              className=" min-w-[30vw]  dark:bg-[#121212] dark:border-black sm:p-4 p-2 rounded-2xl my-4 mt-6 flex-col justify-center  bg-inputBg outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959] sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.98] hover:scale-[0.95]  active:duration-300 placeholder:text-[14px] transition-all duration-300 min-h-[40vh] sm:w-[80vw] w-full"
             ></textarea>
           </div>
         </div>

@@ -78,16 +78,16 @@ function FloatingNote() {
           }`}
         >
           <button
-            className={`exit min-w-[20vw] rounded-full animate-float  px-4 text-nowrap flex  items-center  cursor-pointer  md:py-[18px] py-[10px] dark:bg-[#121212] transition-all duration-300  sm:p-4 p-2  my-4 mt-10 justify-center text-center  bg-inputBg  hover:outline-[#825a5a] sm:text-base text-[#9e5959] sm:transition-all sm:duration-300 text-[14px] ${
-              !renderStickyNote && "xs:text-[10px]"
-            } font-[silkScreen]`}
+            className={`exit min-w-[20vw]  rounded-full animate-float  px-4 text-nowrap flex  items-center  cursor-pointer  md:py-4 py-2 dark:bg-[#121212] transition-all duration-300  sm:p-4 p-2  my-4 mt-10 justify-center text-center   bg-inputBg outline-none hover:outline-[#825a5a]  ml-1  sm:text-base text-[#9e5959] sm:transition-all sm:duration-300 text-[14px]  ${
+              !renderStickyNote && "xs:text-[10px] mr-2 xs:mr-8"
+            } `}
             onClick={handleNavigation}
           >
             {renderStickyNote ? "Exit" : "Sticky Notes"}
           </button>
           {renderStickyNote && stickies.length > 2 && (
             <button
-              className="exit min-w-[20vw]  rounded-full animate-float  px-4 text-nowrap flex  items-center  cursor-pointer  md:py-4 py-2 dark:bg-[#121212] transition-all duration-300  sm:p-4 p-2  my-4 mt-10 justify-center text-center   bg-inputBg outline-none hover:outline-[#825a5a] sm:text-base text-[#9e5959] sm:transition-all sm:duration-300 text-[14px] font-[silkScreen]"
+              className="reset min-w-[20vw]  rounded-full animate-float  px-4 text-nowrap flex  items-center  cursor-pointer  md:py-4 py-2 dark:bg-[#121212] transition-all duration-300  sm:p-4 p-2  my-4 mt-10 justify-center text-center   bg-inputBg outline-none hover:outline-[#825a5a] sm:text-base text-[#9e5959] sm:transition-all sm:duration-300 text-[14px]"
               onClick={handleReset}
             >
               Reset
@@ -97,7 +97,7 @@ function FloatingNote() {
         <CanvasEffect />
         {renderStickyNote && (
           <div className="flex flex-wrap max-w-[100vw] justify-center h-screen gap-1">
-            <div className="colorPanel bg-[#dcdcdc] absolute left-10 flex items-center justify-around rounded-3xl h-12 min-w-[100px] my-2 sm:top-8">
+            <div className="colorPanel bg-[#dcdcdc] absolute sm:left-10 flex items-center justify-around rounded-3xl h-12 min-w-[100px] my-2 sm:top-8 top-0 left-2 dark:bg-[#121212]">
               <input
                 type="color"
                 id="color-picker"
@@ -122,7 +122,7 @@ function FloatingNote() {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="w-6 h-6"
+                  className="w-6 h-6 dark:fill-white"
                 >
                   <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
                 </svg>
@@ -137,7 +137,7 @@ function FloatingNote() {
                   key={note._id}
                 >
                   <textarea
-                    className="box sm:h-[250px] sm:w-[230px] h-[200px] w-[200px] dark:bg-[#121212] bg-[#F0F4F7] sm:rounded-[30px] rounded-[15px] border-1 sm:border-t-[50px] border-t-[30px] border-black outline-none py-1 px-2 dark:text-white text-black  flex flex-grow-0 resize-none"
+                    className="box sm:h-[250px] sm:w-[230px] h-[200px] w-[200px] dark:bg-[#121212] bg-[#F0F4F7] sm:rounded-[30px] rounded-[15px] border-1 sm:border-t-[50px] border-t-[32px] border-black outline-none py-1 px-2 dark:text-white text-black flex flex-grow-0 resize-none "
                     value={note.text}
                     placeholder="Write anything..."
                     onChange={(e) =>

@@ -51,7 +51,7 @@ function Timer() {
   const min = Math.floor((time / 60000) % 60);
 
   return (
-    <div className="flex sm:flex-row flex-col-reverse items-center justify-center  font-[Quantico] transition-bg duration-300 sm:gap-8 lg:gap-32 md:gap-8 sm:min-w-[60vw]">
+    <div className="flex sm:flex-row flex-col-reverse items-center justify-center  transition-bg duration-300 sm:gap-8 lg:gap-32 md:gap-8 sm:min-w-[60vw]">
       <div className="flex gap-4 md:text-2xl lg:text-3xl  sm:text-2xl text-xl xss:text-sm xss:gap-1 transition-all duration-300  text-[#ffffff] dark:text-[#646464] ">
         <button onClick={handleStart} disabled={isRunning}>
           Start
@@ -61,7 +61,7 @@ function Timer() {
         </button>
         <button onClick={handleReset}>Reset</button>
       </div>
-      <h1 className=" md:text-6xl sm:text-4xl text-3xl xss:text-sm  font-[Quantico]  transition-all duration-300  text-[#ffffff] dark:text-[#ffffff]  font-semibold">{`${min}:${
+      <h1 className=" md:text-6xl sm:text-4xl text-3xl xss:text-sm  transition-all duration-300  text-[#ffffff] dark:text-[#ffffff]  font-semibold">{`${min}:${
         sec < 10 ? "0" : ""
       }${sec}:${ms < 10 ? "0" : ""}${ms}`}</h1>
     </div>

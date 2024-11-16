@@ -65,7 +65,7 @@ function Menu({ handleLogout }) {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.1 }}
-          className="options fixed right-0 top-[57px] sm:top-[61px] rounded-l-lg px-4 py-4 flex flex-col items-start gap-3 dark:bg-[#181818]  sm:p-4 p-2 justify-center bg-[#ffffff] outline-none  sm:transition-bg sm:duration-300 sm:ease-in-out  transition-bg duration-300 dark:border-[#000000] border border-[#5a5a5a] "
+          className="options fixed right-0 top-[56px] sm:top-[60px] rounded-l-lg px-4 py-4 flex flex-col items-start gap-3 dark:bg-[#2D3031]  sm:p-4 p-2 justify-center bg-[#F8EEEE] outline-none  sm:transition-bg sm:duration-300 sm:ease-in-out  transition-bg duration-300 dark:border-[#161616] border border-[#909090] "
           ref={menuRef}
         >
           {isChangingUsername && (
@@ -78,7 +78,7 @@ function Menu({ handleLogout }) {
                 className={` dark:bg-darkBg dark:border-[#c2bfbf] border border-[#5c5c5c] sm:p-2 p-2 sm:px-4 rounded-full flex-col justify-center bg-[#ffffff] outline-none sm:placeholder:text-sm placeholder:text-[#000000]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95] active:duration-300 placeholder:text-xm transition-all duration-300 min-w-[15vw] placeholder:text-center text-center dark:placeholder:text-[#ffffff]`}
               />
               <button
-                className="text-center font-[silkScreen] sm:hover:transition-colors hover:duration-300  active:text-[#8d5353] sm:hover:text-[#8d5353] active:duration-0 transition-bg duration-300"
+                className="text-center  sm:hover:transition-colors hover:duration-300  active:text-[#8d5353] sm:hover:text-[#8d5353] active:duration-0 transition-bg duration-300"
                 onClick={handleUsernameChange}
               >
                 Change

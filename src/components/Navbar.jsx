@@ -14,7 +14,6 @@ function Navbar() {
   const handleLogout = () => {
     const confirmed = window.confirm("Are you sure to logout?");
     if (confirmed) {
-      console.log("logout called.");
       navigate("/login");
       dispatch(logout());
     }

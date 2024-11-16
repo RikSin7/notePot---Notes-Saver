@@ -310,8 +310,8 @@ function TodoTasks({
           ) : (
             <h1 className="text-center flex justify-center items-center w-full md:text-5xl  text-3xl text-[#744c4c] dark:text-[#646464] transition-bg duration-300 font-semibold font-[Tangerine]">
               {debouncedSearchTerm
-                ? "No matching TO-DOs found!"
-                : "No TO-DOs created yet!"}
+                ? "No matching todo found!"
+                : "No todos created yet!"}
             </h1>
           )}
           {allTodos.length > 2 && !debouncedSearchTerm && (
