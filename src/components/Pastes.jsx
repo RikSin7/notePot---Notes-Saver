@@ -11,6 +11,7 @@ import FloatingNote from "./FloatingNote";
 
 function Pastes() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const allPastes = useSelector((state) => state.paste.pastes);
   const dispatch = useDispatch();
   const [sortedPastes, setSortedPastes] = useState([]);
@@ -18,9 +19,19 @@ function Pastes() {
   const [highlightPaste, setHighlightedPaste] = useState(null);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
+  console.log(debouncedSearchTerm);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 300);
+    return () => {
+      clearTimeout(timer);
+    };
+  });
+
   useEffect(() => {
     const filteredPastes = allPastes.filter((paste) =>
-      paste.title.toLowerCase().includes(searchTerm.toLowerCase())
+      paste.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
     );
 
     const sorted = [...filteredPastes].sort((a, b) => {
@@ -30,7 +41,7 @@ function Pastes() {
     });
 
     setSortedPastes(sorted);
-  }, [allPastes, searchTerm]);
+  }, [allPastes, debouncedSearchTerm]);
 
   const handleTogglePin = (pasteId) => {
     const currentScrollPosition = window.scrollY;
@@ -302,7 +313,7 @@ function Pastes() {
               </div>
             )}
           </div>
-          {allPastes.length > 2 && !searchTerm && (
+          {allPastes.length > 2 && !debouncedSearchTerm && (
             <div className="flex justify-center">
               <button
                 className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center bg-inputBg transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8 text-[14px] sm:text-base text-[#9e5959] px-8  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300"

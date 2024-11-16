@@ -12,7 +12,7 @@ import Login from "./auth/Login";
 import CanvasEffect from "./CanvasSpiderWebEffect";
 
 function TodoTasks({
-  searchTerm,
+  debouncedSearchTerm,
   allTodos,
   setSearchParams,
   inputRef,
@@ -24,10 +24,9 @@ function TodoTasks({
   const todoRefs = useRef({}); // Store refs for each todo item
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-
   useEffect(() => {
     const filteredTodos = allTodos.filter((todo) =>
-      todo.title.toLowerCase().includes(searchTerm.toLowerCase())
+      todo.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
     );
 
     const sorted = [...filteredTodos].sort((a, b) => {
@@ -37,7 +36,7 @@ function TodoTasks({
     });
 
     setSortedTodos(sorted);
-  }, [allTodos, searchTerm]);
+  }, [allTodos, debouncedSearchTerm]);
 
   const handleTogglePin = (todoId) => {
     // Step 1: Capture the current scroll position before updating
@@ -124,7 +123,7 @@ function TodoTasks({
   };
   return (
     <>
-    <CanvasEffect />
+      <CanvasEffect />
       {isAuthenticated ? (
         <div className="flex flex-col items-center mt-8 px-4 w-[98vw]">
           {sortedTodos.length > 0 ? (
@@ -310,12 +309,12 @@ function TodoTasks({
             ))
           ) : (
             <h1 className="text-center flex justify-center items-center w-full md:text-5xl  text-3xl text-[#744c4c] dark:text-[#646464] transition-bg duration-300 font-semibold font-[Tangerine]">
-              {searchTerm
+              {debouncedSearchTerm
                 ? "No matching TO-DOs found!"
                 : "No TO-DOs created yet!"}
             </h1>
           )}
-          {allTodos.length > 2 && !searchTerm && (
+          {allTodos.length > 2 && !debouncedSearchTerm && (
             <div className="flex justify-center mt-6 w-full">
               <button
                 className="font-[silkScreen]  min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full text-center bg-inputBg  transition-all duration-300 outline-none hover:outline-[#825a5a] mb-8 text-[14px] sm:text-base text-[#9e5959] px-8  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300"

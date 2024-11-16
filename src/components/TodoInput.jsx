@@ -8,6 +8,7 @@ import Login from "./auth/Login";
 
 function TodoInput() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [title, setTitle] = useState("");
   const [searchParams, setSearchParams] = useSearchParams({});
   const allTodos = useSelector((state) => state.todo.todos);
@@ -16,6 +17,18 @@ function TodoInput() {
   const [inputHighlight, setInputHightlight] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  console.log(debouncedSearchTerm);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchTerm, debouncedSearchTerm]);
 
   useEffect(() => {
     if (todoId) {
@@ -63,7 +76,6 @@ function TodoInput() {
 
   return (
     <>
-    
       {isAuthenticated ? (
         <div className="flex flex-col items-center mt-16 px-4 w-[98vw]">
           <form
@@ -134,14 +146,14 @@ function TodoInput() {
           )}
 
           <TodoTasks
-            searchTerm={searchTerm}
+            debouncedSearchTerm={debouncedSearchTerm}
             allTodos={allTodos}
             setSearchParams={setSearchParams}
             inputRef={inputRef}
             setInputHightlight={setInputHightlight}
           />
         </div>
-       ) : (
+      ) : (
         <Login />
       )}
     </>
