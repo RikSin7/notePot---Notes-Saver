@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import CanvasEffect from "./CanvasSpiderWebEffect";
 import { useDispatch, useSelector } from "react-redux";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   addSticky,
   removeSticky,
@@ -128,39 +128,50 @@ function FloatingNote() {
                 </svg>
               </button>
             </div>
-            {stickies.map((note, index) => (
-              <div className="" key={index}>
-                <motion.div
-                  drag
-                  dragConstraints={ref}
-                  className="relative"
-                  key={note._id}
-                >
-                  <textarea
-                    className="box sm:h-[250px] sm:w-[230px] h-[200px] w-[200px] dark:bg-[#121212] bg-[#F0F4F7] sm:rounded-[30px] rounded-[15px] border-1 sm:border-t-[50px] border-t-[32px] border-black outline-none py-1 px-2 dark:text-white text-black flex flex-grow-0 resize-none "
-                    value={note.text}
-                    placeholder="Write anything..."
-                    onChange={(e) =>
-                      handleNoteChange(note._id, "text", e.target.value)
-                    }
-                    style={{ borderTopColor: note.color }}
-                  ></textarea>
-                  <button
-                    className="close absolute p-1 top-1 sm:top-3 right-2 bg-[#131313] w-6 h-6 rounded-full flex justify-center items-center"
-                    onClick={() => handleRemove(note._id)}
+            <AnimatePresence mode={"popLayout"}>
+              {stickies.map((note) => (
+                <motion.div key={note._id}>
+                  <motion.div
+                    drag
+                    dragConstraints={ref}
+                    className="relative"
+                    key={note._id}
+                    layout
+                    initial={{ opacity: 0, y: 50, scale: 0.5 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{
+                      opacity: 0,
+                      scale: 0.5,
+                      y: -50,
+                      transition: { duration: 0.2, ease: "easeInOut" },
+                    }}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-5 h-5 text-white"
+                    <textarea
+                      className="box sm:h-[250px] sm:w-[230px] h-[200px] w-[200px] dark:bg-[#121212] bg-[#F0F4F7] sm:rounded-[30px] rounded-[15px] border-1 sm:border-t-[50px] border-t-[32px] border-black outline-none py-1 px-2 dark:text-white text-black flex flex-grow-0 resize-none "
+                      value={note.text}
+                      placeholder="Write anything..."
+                      onChange={(e) =>
+                        handleNoteChange(note._id, "text", e.target.value)
+                      }
+                      style={{ borderTopColor: note.color }}
+                    ></textarea>
+                    <button
+                      className="close absolute p-1 top-1 sm:top-3 right-2 bg-[#131313] w-6 h-6 rounded-full flex justify-center items-center"
+                      onClick={() => handleRemove(note._id)}
                     >
-                      <path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path>
-                    </svg>
-                  </button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="w-5 h-5 text-white"
+                      >
+                        <path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path>
+                      </svg>
+                    </button>
+                  </motion.div>
                 </motion.div>
-              </div>
-            ))}
+              ))}
+            </AnimatePresence>
           </div>
         )}
       </div>
