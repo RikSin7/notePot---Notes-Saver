@@ -10,12 +10,18 @@ function Login() {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [email, setEmail] = useState("");
+<<<<<<< HEAD
   const [isSignup, setIsSignup] = useState(false);
   const [isReset, setIsReset] = useState(false);
+=======
+  const [isSignup, setIsSignup] = useState(false); // Toggle between login and signup
+  const [isReset, setIsReset] = useState(false); // New state for resetting password
+>>>>>>> origin/main
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
+<<<<<<< HEAD
   //for form validation
   const [errors, setErrors] = useState({
     username: "",
@@ -23,11 +29,14 @@ function Login() {
     email: "",
   });
 
+=======
+>>>>>>> origin/main
   const toggleShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
 
   const handleLogin = () => {
+<<<<<<< HEAD
     let isValid = true;
     const unallowedChars = ["!", "^", "(", ")", "~"];
     const newErrors = {
@@ -66,10 +75,25 @@ function Login() {
       } catch (error) {
         toast.error(error.message); // Show error message for invalid credentials
       }
+=======
+    if (!username.trim() || !password.trim()) {
+      toast.error("Please fill in all fields.");
+      return;
+    }
+
+    const user = { username, password }; // User input for login
+
+    try {
+      dispatch(login(user)); // Try to log in
+      navigate("/"); // Redirect to home page after successful login
+    } catch (error) {
+      toast.error(error.message); // Show error message for invalid credentials
+>>>>>>> origin/main
     }
   };
 
   const handleSignup = () => {
+<<<<<<< HEAD
     let isValid = true;
     const unallowedChars = ["!", "^", "(", ")", "~"];
     const newErrors = {
@@ -103,6 +127,11 @@ function Login() {
     } else if (!emailRegex.test(email)) {
       newErrors.email = "Invalid email format.";
       isValid = false;
+=======
+    if (!username.trim() || !password.trim() || !email.trim()) {
+      toast.error("Please fill in all fields.");
+      return;
+>>>>>>> origin/main
     }
 
     // Check if the email already exists
@@ -112,6 +141,7 @@ function Login() {
       toast.error("User already exists. Please log in.");
       return;
     }
+<<<<<<< HEAD
     if (!isValid) {
       toast.error("Please fill in all fields.");
     }
@@ -172,6 +202,25 @@ function Login() {
       } catch (error) {
         toast.error(error.message); // Notify user of any errors
       }
+=======
+
+    const user = { username, password, email }; // New user data
+    dispatch(signup(user)); // Dispatch signup action
+    navigate("/"); // Redirect to home page after signup
+  };
+
+  const handleReset = () => {
+    if (!email.trim() || !newPassword.trim()) {
+      toast.error("Please fill in all fields."); // Notify user to fill fields
+      return;
+    }
+    try {
+      dispatch(resetPassword({ email, newPassword }));
+      toast.success("Password reset successfully!");
+      setIsReset(false); // Reset state after successful password reset
+    } catch (error) {
+      toast.error(error.message); // Notify user of any errors
+>>>>>>> origin/main
     }
   };
 
@@ -182,9 +231,16 @@ function Login() {
         <h1>Write Awsm Notes, TO-DOs</h1>
       </div>
 
+<<<<<<< HEAD
       {isReset ? (
         <>
           <div className="flex justify-center items-center  dark:bg-[#121212]  bg-[#F9ECE8] outline-none hover:outline-[#825a5a] sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.99] hover:scale-[0.99]  transition-all duration-300 w-[70vw] sm:w-[500px] rounded-full gap-1 px-4">
+=======
+      {/* Conditional Rendering based on isReset, isSignup state */}
+      {isReset ? (
+        <>
+          <div className="flex justify-center items-center  dark:bg-[#121212]  bg-[#F9ECE8] outline-none hover:outline-[#825a5a] sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95]  transition-all duration-300 w-[70vw] sm:w-[500px] rounded-full gap-1 px-4">
+>>>>>>> origin/main
             <span>
               <svg
                 className="sm:w-6 w-5"
@@ -200,6 +256,7 @@ function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Registered e-mail address"
+<<<<<<< HEAD
               className={`dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base dark:placeholder:text-white placeholder:text-black   w-full sm:py-4 py-3 xs:py-2 rounded-full`}
               required
             />
@@ -210,6 +267,13 @@ function Login() {
             </span>
           )}
           <div className="flex justify-center items-center  dark:bg-[#121212]  bg-[#F9ECE8] outline-none hover:outline-[#825a5a] sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.99] hover:scale-[0.99]  transition-all duration-300 w-[70vw] sm:w-[500px] rounded-full gap-1 px-4">
+=======
+              className={`dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base placeholder:text-[#9e5959]  w-full sm:py-4 py-3 xs:py-2 rounded-full`}
+              required
+            />
+          </div>
+          <div className="flex justify-center items-center  dark:bg-[#121212]  bg-[#F9ECE8] outline-none hover:outline-[#825a5a] sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95]  transition-all duration-300 w-[70vw] sm:w-[500px] rounded-full gap-1 px-4">
+>>>>>>> origin/main
             <span>
               <svg
                 className="sm:w-6 w-5"
@@ -225,10 +289,16 @@ function Login() {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               placeholder="New password"
+<<<<<<< HEAD
               className="dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base dark:placeholder:text-white placeholder:text-black   w-full sm:py-4 py-3 xs:py-2 rounded-full"
               required
             />
 
+=======
+              className="dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base placeholder:text-[#9e5959]  w-full sm:py-4 py-3 xs:py-2 rounded-full"
+              required
+            />
+>>>>>>> origin/main
             <div onClick={toggleShowPassword}>
               {!showPassword ? (
                 <span>
@@ -253,6 +323,7 @@ function Login() {
               )}
             </div>
           </div>
+<<<<<<< HEAD
           {errors.password !== "" && (
             <span className="text-[#b55454] w-[70vw] sm:w-[500px] px-4 -my-1">
               {errors.password}
@@ -260,36 +331,58 @@ function Login() {
           )}
           <div className="flex  flex-col sm:w-[500px]  w-[70vw] gap-2 ">
             <span className="flex  text-center dark:bg-[#3b466b] dark:border-black border-none rounded-full justify-center  bg-[#965f5f] outline-none  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.99] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 gap-0 mt-4 sm:dark:hover:outline-[#7588ae] sm:hover:outline-[#825a5a] text-white px-4 ">
+=======
+          <div className="flex  flex-col sm:w-[500px]  w-[70vw] gap-2 ">
+            <span className="flex  text-center dark:bg-[#3b466b] dark:border-black border-none rounded-full justify-center  bg-[#965f5f] outline-none  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 gap-0 mt-4 dark:hover:outline-[#7588ae] hover:outline-[#825a5a] text-white px-4">
+>>>>>>> origin/main
               <svg
                 className="sm:w-6 w-5 shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
+<<<<<<< HEAD
                 onClick={handleReset}
+=======
+>>>>>>> origin/main
               >
                 <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM16.8201 17.0761C18.1628 15.8007 19 13.9981 19 12C19 8.13401 15.866 5 12 5C10.9391 5 9.9334 5.23599 9.03241 5.65834L10.0072 7.41292C10.6177 7.14729 11.2917 7 12 7C14.7614 7 17 9.23858 17 12H14L16.8201 17.0761ZM14.9676 18.3417L13.9928 16.5871C13.3823 16.8527 12.7083 17 12 17C9.23858 17 7 14.7614 7 12H10L7.17993 6.92387C5.83719 8.19929 5 10.0019 5 12C5 15.866 8.13401 19 12 19C13.0609 19 14.0666 18.764 14.9676 18.3417Z"></path>
               </svg>
 
               <button
                 onClick={handleReset}
+<<<<<<< HEAD
                 className="text-center sm:p-4 p-3 xs:py-2 rounded-full justify-center  bg-transparent outline-none sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.99] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 dark:bg-transparent "
+=======
+                className="text-center sm:p-4 p-3 xs:py-2 rounded-full justify-center  bg-transparent outline-none sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 dark:bg-transparent"
+>>>>>>> origin/main
               >
                 Reset Password
               </button>
             </span>
+<<<<<<< HEAD
             <span className="flex  text-center dark:bg-[#3b466b] dark:border-black border-none rounded-full justify-center  bg-[#965f5f] outline-none  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.99] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 gap-0  sm:dark:hover:outline-[#7588ae] sm:hover:outline-[#825a5a] text-white px-4">
+=======
+            <span className="flex text-center dark:bg-[#3b466b] dark:border-black border-none rounded-full justify-center  bg-[#965f5f] outline-none  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 gap-0 dark:hover:outline-[#7588ae]  hover:outline-[#825a5 text-white px-4">
+>>>>>>> origin/main
               <svg
                 className="sm:w-6 w-5 shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
+<<<<<<< HEAD
                 onClick={() => setIsReset(false)}
+=======
+>>>>>>> origin/main
               >
                 <path d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM12 11V8L8 12L12 16V13H16V11H12Z"></path>
               </svg>
               <button
                 onClick={() => setIsReset(false)}
+<<<<<<< HEAD
                 className="text-center sm:p-4 p-3 xs:py-2 rounded-full justify-center  bg-transparent outline-none sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.99] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 dark:bg-transparent"
+=======
+                className="text-center sm:p-4 p-3 xs:py-2 rounded-full justify-center  bg-transparent outline-none sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 dark:bg-transparent"
+>>>>>>> origin/main
               >
                 Back to Login
               </button>
@@ -298,7 +391,11 @@ function Login() {
         </>
       ) : (
         <>
+<<<<<<< HEAD
           <div className="flex justify-center items-center  dark:bg-[#121212]  bg-[#F9ECE8] outline-none hover:outline-[#825a5a] sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.99] hover:scale-[0.99]  transition-all duration-300 w-[70vw] sm:w-[500px] rounded-full  border-none  gap-1 px-4">
+=======
+          <div className="flex justify-center items-center  dark:bg-[#121212]  bg-[#F9ECE8] outline-none hover:outline-[#825a5a] sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95]  transition-all duration-300 w-[70vw] sm:w-[500px] rounded-full  border-none  gap-1 px-4">
+>>>>>>> origin/main
             <span>
               <svg
                 className="sm:w-6 w-5"
@@ -314,6 +411,7 @@ function Login() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
+<<<<<<< HEAD
               className="dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base dark:placeholder:text-white placeholder:text-black  w-full sm:py-4 py-3 xs:py-2 rounded-full"
               required
             />
@@ -325,6 +423,13 @@ function Login() {
           )}
 
           <div className="flex justify-center items-center  dark:bg-[#121212]  bg-[#F9ECE8] outline-none hover:outline-[#825a5a] sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.99] hover:scale-[0.99]  transition-all duration-300 w-[70vw] sm:w-[500px] rounded-full gap-1 px-4">
+=======
+              className=" dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base placeholder:text-[#9e5959]  w-full sm:py-4 py-3 xs:py-2 rounded-full"
+              required
+            />
+          </div>
+          <div className="flex justify-center items-center  dark:bg-[#121212]  bg-[#F9ECE8] outline-none hover:outline-[#825a5a] sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95]  transition-all duration-300 w-[70vw] sm:w-[500px] rounded-full gap-1 px-4">
+>>>>>>> origin/main
             <span>
               <svg
                 className="sm:w-6 w-5"
@@ -340,10 +445,16 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
+<<<<<<< HEAD
               className="dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base dark:placeholder:text-white placeholder:text-black  w-full sm:py-4 py-3 xs:py-2 rounded-full"
               required
             />
 
+=======
+              className="dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base placeholder:text-[#9e5959]  w-full sm:py-4 py-3 xs:py-2 rounded-full"
+              required
+            />
+>>>>>>> origin/main
             <div onClick={toggleShowPassword}>
               {!showPassword ? (
                 <span>
@@ -368,6 +479,7 @@ function Login() {
               )}
             </div>
           </div>
+<<<<<<< HEAD
           {errors.password !== "" && (
             <span className="text-[#b55454] w-[70vw] sm:w-[500px] px-4 -my-1">
               {errors.password}
@@ -405,6 +517,33 @@ function Login() {
           <button
             onClick={isSignup ? handleSignup : handleLogin}
             className="sm:w-[500px] text-center dark:bg-[#3b466b] sm:py-4 py-3 xs:py-2 rounded-full justify-center bg-[#965f5f] outline-none sm:dark:hover:outline-[#7588ae] sm:hover:outline-[#825a5a]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.99] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 w-[70vw] mt-4 text-white outline-[#825a5a] dark:outline-[#7588ae] sm:outline-none sm:dark:outline-none"
+=======
+          {isSignup && (
+            <div className="flex justify-center items-center  dark:bg-[#121212]  bg-[#F9ECE8] outline-none hover:outline-[#825a5a] sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95]  transition-all duration-300 w-[70vw] sm:w-[500px] rounded-full gap-1 px-4">
+              <span>
+                <svg
+                  className="sm:w-6 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3ZM20 7.23792L12.0718 14.338L4 7.21594V19H20V7.23792ZM4.51146 5L12.0619 11.662L19.501 5H4.51146Z"></path>
+                </svg>
+              </span>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="E-mail address"
+                className={`dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base placeholder:text-[#9e5959]  w-full sm:py-4 py-3 xs:py-2 rounded-full`}
+                required
+              />
+            </div>
+          )}
+          <button
+            onClick={isSignup ? handleSignup : handleLogin}
+            className="sm:w-[500px] text-center dark:bg-[#3b466b] sm:py-4 py-3 xs:py-2 rounded-full justify-center bg-[#965f5f] outline-none dark:hover:outline-[#7588ae] hover:outline-[#825a5a]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300 transition-all duration-300 w-[70vw] mt-4 text-white"
+>>>>>>> origin/main
           >
             {isSignup ? "Sign Up" : "Login"}
           </button>
@@ -412,6 +551,7 @@ function Login() {
       )}
       {!isReset && (
         <div className="flex gap-2 sm:min-w-[500px] w-[70vw] flex-wrap justify-center items-center text-sm sm:text-base mt-2 flex-col">
+<<<<<<< HEAD
           <h1 className="text-center">
             {isSignup ? "Already have an account?" : "Don't have an account?"}
           </h1>
@@ -419,6 +559,18 @@ function Login() {
             <button
               onClick={() => setIsSignup(!isSignup)}
               className="text-[#954444] dark:text-[#ad5e5e] font-semibold bg-transparent p-2"
+=======
+          {/* <div> */}
+          <h1 className="text-center">
+            {isSignup ? "Already have an account?" : "Don't have an account?"}
+          </h1>
+          {/* <div className="border border-black dark:border-white mt-2"> </div> */}
+          {/* </div> */}
+          <div className="w- flex flex-col">
+            <button
+              onClick={() => setIsSignup(!isSignup)}
+              className="text-[#954444] dark:text-[#ad5e5e] font-semibold bg-transparent p-4"
+>>>>>>> origin/main
             >
               {isSignup ? "Login" : "Sign Up"}
             </button>
@@ -431,6 +583,10 @@ function Login() {
             >
               Forgot Password?
             </button>
+<<<<<<< HEAD
+=======
+            {/* <div className="border border-black dark:border-white mt-2"> </div> */}
+>>>>>>> origin/main
           </div>
         </div>
       )}
