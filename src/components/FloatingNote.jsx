@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import  { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import CanvasEffect from "./CanvasSpiderWebEffect";
 import { useDispatch, useSelector } from "react-redux";
