@@ -8,6 +8,7 @@ import {
   togglePinPaste,
 } from "../redux/pasteSlice";
 import FloatingNote from "./FloatingNote";
+import Login from "./auth/Login";
 
 function Pastes() {
   const [searchTerm, setSearchTerm] = useState("");

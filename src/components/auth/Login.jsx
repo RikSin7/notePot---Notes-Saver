@@ -202,6 +202,7 @@ function Login() {
               placeholder="Registered e-mail address"
               className={`dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base dark:placeholder:text-white placeholder:text-black   w-full sm:py-4 py-3 xs:py-2 rounded-full`}
               required
+              onFocus={() => setErrors({ ...errors, email: "" })}
             />
           </div>
           {errors.email !== "" && (
@@ -227,6 +228,7 @@ function Login() {
               placeholder="New password"
               className="dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base dark:placeholder:text-white placeholder:text-black   w-full sm:py-4 py-3 xs:py-2 rounded-full"
               required
+              onFocus={() => setErrors({ ...errors, password: "" })}
             />
 
             <div onClick={toggleShowPassword}>
@@ -316,6 +318,7 @@ function Login() {
               placeholder="Username"
               className="dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base dark:placeholder:text-white placeholder:text-black  w-full sm:py-4 py-3 xs:py-2 rounded-full"
               required
+              onFocus={() => setErrors({ ...errors, username: "" })}
             />
           </div>
           {errors.username !== "" && (
@@ -342,6 +345,7 @@ function Login() {
               placeholder="Password"
               className="dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base dark:placeholder:text-white placeholder:text-black  w-full sm:py-4 py-3 xs:py-2 rounded-full"
               required
+              onFocus={() => setErrors({ ...errors, password: "" })}
             />
 
             <div onClick={toggleShowPassword}>
@@ -393,6 +397,7 @@ function Login() {
                   placeholder="E-mail address"
                   className={`dark:bg-transparent bg-transparent outline-none  sm:placeholder:text-base dark:placeholder:text-white placeholder:text-black   w-full sm:py-4 py-3 xs:py-2 rounded-full`}
                   required
+                  onFocus={() => setErrors({ ...errors, email: "" })}
                 />
               </div>
               {errors.email !== "" && (

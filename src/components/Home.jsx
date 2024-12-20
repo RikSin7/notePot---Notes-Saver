@@ -34,7 +34,7 @@ function Home() {
       setTitle(pasteToEdit.title);
       setValue(pasteToEdit.description);
     }
-  }, [pasteId]);
+  }, [pasteId, allPastes]);
 
   const createPaste = () => {
     // Check if a paste with the same title already exists
