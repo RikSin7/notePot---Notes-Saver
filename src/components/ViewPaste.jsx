@@ -1,6 +1,6 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import CanvasEffect from "./CanvasSpiderWebEffect";
 
 function ViewPaste() {
   const { id } = useParams();
@@ -17,6 +17,7 @@ function ViewPaste() {
 
   return (
     <div className="mt-16 flex flex-col items-center max-w-[98vw]  min-h-screen transition-bg duration-300 text-wrap">
+      <CanvasEffect />
       <h1 className="sm:my-[10vh] my-[5vh] font-[rancho] font-bold sm:text-5xl text-3xl text-[#ffffff] dark:text-[#646464] transition-all duration-300 text-center">
         You write Awesome notes.
       </h1>

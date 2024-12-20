@@ -65,7 +65,6 @@ function App() {
 
   const isDarkMode = useSelector((state) => state.darkMode.isDarkMode);
 
-  // Apply the 'dark' class to the root element based on Redux state
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add("dark");

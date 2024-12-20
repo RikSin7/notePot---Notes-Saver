@@ -1,4 +1,4 @@
-import  { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import CanvasEffect from "./CanvasSpiderWebEffect";
 import { useDispatch, useSelector } from "react-redux";
@@ -94,9 +94,9 @@ function FloatingNote() {
             </button>
           )}
         </div>
-        <CanvasEffect />
         {renderStickyNote && (
           <div className="flex flex-wrap max-w-[100vw] justify-center h-screen gap-1">
+            <CanvasEffect />
             <div className="colorPanel bg-[#dcdcdc] absolute sm:left-10 flex items-center justify-around rounded-3xl h-12 min-w-[100px] my-2 sm:top-8 top-0 left-2 dark:bg-[#121212]">
               <input
                 type="color"

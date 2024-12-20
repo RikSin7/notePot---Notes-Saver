@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TodoTasks from "./TodoTasks";
 import { useSearchParams } from "react-router-dom";
 import { addToTodo, updateToTodo } from "../redux/todoSlice";
@@ -17,6 +17,7 @@ function TodoInput() {
   const [inputHighlight, setInputHightlight] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const [quote, setQuote] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -72,6 +73,31 @@ function TodoInput() {
     setIsRunning((prev) => !prev);
   };
 
+  //progress calculation
+  let completedTasks = 0;
+  allTodos.forEach((todo) => {
+    if (todo.completed) {
+      completedTasks += 1;
+    }
+  });
+
+  const totalTasks = allTodos.length;
+  const progressPercentage =
+    totalTasks === 0 ? 0 : (completedTasks / totalTasks) * 100;
+
+  useEffect(() => {
+    const randomNumber = Math.floor(Math.random() * 5);
+    const quotes = [
+      "Some well-deserved rest is earned, Champ! 🏆",
+      "Great effort! Now, treat yourself! You deserve it! 🎉",
+      "One step closer to greatness! Keep crushing! 💪",
+      "No task is too big—keep winning! 🏅",
+      "You're on top of your game! You're unstoppable! ⚡",
+    ];
+
+    setQuote(quotes[randomNumber]);
+  }, [progressPercentage]);
+
   return (
     <>
       {isAuthenticated ? (
@@ -87,11 +113,11 @@ function TodoInput() {
               onChange={(e) => setTitle(e.target.value)}
               placeholder="What's the plan today?"
               className={` min-w-[30vw]  dark:bg-[#121212] dark:border-black border border-[#c5c5c5] sm:p-4 p-2 rounded-full flex-col justify-center bg-inputBg  outline-none hover:outline-[#825a5a] sm:placeholder:text-base placeholder:text-[#9e5959]  sm:transition-all sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-[0.98] hover:scale-[0.95] active:duration-300 placeholder:text-[14px] transition-all duration-300 w-full
-      ${
-        inputHighlight
-          ? "transition-all duration-1000  scale-[1.03] outline-[#825a5a] bg-white dark:bg-[#212121]"
-          : "transition-all duration-300  border border-[#292929]"
-      }`}
+    ${
+      inputHighlight
+        ? "transition-all duration-1000  scale-[1.03] outline-[#825a5a] bg-white dark:bg-[#212121]"
+        : "transition-all duration-300  border border-[#292929]"
+    }`}
             />
             <button
               className="min-w-[30vw] text-center dark:bg-[#121212] dark:border-black border-none sm:p-4 p-2 rounded-full justify-center  bg-inputBg  outline-none hover:outline-[#825a5a]  sm:transition-all sm:duration-300 sm:ease-in-out sm:hover:scale-[0.95] hover:scale-[0.95] sm:active:scale-[1.05] active:scale-[1.08] active:duration-300  transition-all duration-300"
@@ -140,6 +166,31 @@ function TodoInput() {
               >
                 My To-Dos
               </h1>
+            </div>
+          )}
+          {allTodos.length > 0 && (
+            <div className="flex mt-8 w-[98vw] dark:bg-[#121212] bg-[#654A4E] transition-all duration-300 sm:h-8 h-6 rounded-full">
+              <span
+                className={`h-full  ${
+                  completedTasks === totalTasks
+                    ? "bg-transparent"
+                    : "dark:bg-[#3e5842] bg-[#ffffff]"
+                } transition-all duration-300 flex items-center  rounded-full`}
+                style={{ width: `${progressPercentage}%` }}
+              >
+                <h1
+                  className={`px-2 text-sm xss:text-[13px] text-nowrap transition-all duration-300 ${
+                    completedTasks === 0 ? "text-[#ffffff]" : "text-black"
+                  }  ${
+                    completedTasks === totalTasks
+                      ? "dark:text-[#ffffff] text-white"
+                      : "dark:text-[#ffffff]"
+                  }`}
+                >
+                  {completedTasks}/{totalTasks}{" "}
+                  {completedTasks === totalTasks ? `${quote}` : "Completed."}
+                </h1>
+              </span>
             </div>
           )}
 

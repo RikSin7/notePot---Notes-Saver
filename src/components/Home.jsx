@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { addToPastes, updateToPastes } from "../redux/pasteSlice";
 import Login from "./auth/Login";
 import { setUserFromLocalStorage } from "../redux/authSlice";
-import CanvasEffect from "./CanvasSpiderWebEffect";
 import { motion } from "framer-motion";
 
 function Home() {
@@ -69,7 +68,6 @@ function Home() {
     <>
       {isAuthenticated ? (
         <div className="mt-16 w-[98vw] transition-bg duration-300">
-          <CanvasEffect />
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
